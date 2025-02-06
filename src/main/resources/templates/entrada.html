@@ -7,7 +7,7 @@
 <body>
 <div class="container mt-5">
         <h2>Cadastro de Produto</h2>
-        <form action="#" method="post">
+        <form action="/salvar" method="post">
             <div class="form-group">
                 <label for="codigo">Código</label>
                 <input type="text" class="form-control" id="codigo" name="codigo" required>
@@ -15,7 +15,7 @@
 
             <div class="form-group">
                 <label for="nomedoproduto">Nome do Produto</label>
-                <input type="text" class="form-control" id="nomedoproduto" name="nomedoproduto" required>
+                <input type="text" class="form-control" id="nomedoproduto" name="produtoNome" required>
             </div>
 
             <div class="form-group">
@@ -25,17 +25,17 @@
 
             <div class="form-group">
                 <label for="valorcompra">Valor de Compra</label>
-                <input type="number" class="form-control" id="valorcompra" name="valorcompra" step="0.01" min="0" required>
+                <input type="number" class="form-control" id="valorcompra" name="valorCompra" step="0.01" min="0" required>
             </div>
 
             <div class="form-group">
                 <label for="valorvenda">Valor de Venda</label>
-                <input type="number" class="form-control" id="valorvenda" name="valorvenda" step="0.01" min="0" required>
+                <input type="number" class="form-control" id="valorvenda" name="valorVenda" step="0.01" min="0" required>
             </div>
 
             <div class="form-group">
                 <label for="lucroestimado">Lucro Estimado</label>
-                <input type="number" class="form-control" id="lucroestimado" name="lucroestimado" step="0.01" min="0" readonly>
+                <input type="number" class="form-control" id="lucroestimado" name="lucroEstimado" step="0.01" min="0" required>
             </div>
 
             <button type="submit" class="btn btn-primary">Enviar</button>

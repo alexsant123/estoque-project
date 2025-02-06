@@ -6,7 +6,6 @@ public class Produto {
 
     private long id;
     private String codigo;
-    private Date data;
     private String produtoNome;
     private String valorCompra;
     private String valorVenda;
@@ -16,9 +15,7 @@ public class Produto {
         this.codigo = codigo;
     }
 
-    public void setData(Date data) {
-        this.data = data;
-    }
+
 
     public void setProdutoNome(String produtoNome) {
         this.produtoNome = produtoNome;
@@ -44,9 +41,7 @@ public class Produto {
         return codigo;
     }
 
-    public Date getData() {
-        return data;
-    }
+
 
     public String getProdutoNome() {
         return produtoNome;

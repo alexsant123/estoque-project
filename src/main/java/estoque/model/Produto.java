@@ -22,8 +22,16 @@ public class Produto implements Serializable {
     private String valorCompra;
     private String valorVenda;
     private String lucroEstimado;
+    private String quantidade;
 
 
+    public void setQuantidade(String quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public String getQuantidade() {
+        return quantidade;
+    }
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;

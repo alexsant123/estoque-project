@@ -1,8 +1,13 @@
 package estoque.repository;
 
+import estoque.model.Entrada;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface EntradaRepository  extends CrudRepository {
+@Repository
+public interface EntradaRepository  extends CrudRepository<Entrada, Long> {
 
-
+ @Query
+ public Entrada save(Entrada entrada);
 }

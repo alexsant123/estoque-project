@@ -8,6 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EntradaRepository  extends CrudRepository<Entrada, Long> {
 
- @Query
- public Entrada save(Entrada entrada);
+
 }

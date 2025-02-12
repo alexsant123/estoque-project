@@ -13,7 +13,6 @@ public interface ProdutoRepository extends CrudRepository<Produto, Long> {
     @Query(value = "select p from Produto p where  p.codigo = ?1")
     public Produto  findbyCodigo(String codigo);
 
-    @Query
-    public Produto save(Produto produto);
+
 
 }

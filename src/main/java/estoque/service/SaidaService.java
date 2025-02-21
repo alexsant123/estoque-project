@@ -23,7 +23,7 @@ public class SaidaService {
 
         Integer qtd_repo = produtoRepository.Findquantidadebycodigo(codigo);
 
-        if (quantidade > qtd_repo) {
+        if (quantidade > qtd_repo && quantidade==null) {
 
             model.addAttribute(model.addAttribute("message", "numero não disponível no estoque"));
         } else if (quantidade < qtd_repo) {
@@ -34,8 +34,8 @@ public class SaidaService {
             saida.setDate(data);
             saida.setQuantidade(quantidade);
             saida.setValorVenda(valor_venda);
+            saida.setProduto(produtoRepository.findbyCodigo(codigo));
             saidaRepository.save(saida);
-
 
             model.addAttribute(model.addAttribute("message", "saida feita com sucesso"));
 

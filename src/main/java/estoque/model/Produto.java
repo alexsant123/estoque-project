@@ -3,8 +3,6 @@ package estoque.model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "produto")
@@ -18,67 +16,66 @@ public class Produto implements Serializable {
     private long id;
 
 
-    private String codigo;
+    private int codigo;
     private String produtoNome;
-    private String valorCompra;
-    private String valorVenda;
-    private String lucroEstimado;
-    private String quantidade;
-
-
-    public void setQuantidade(String quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public String getQuantidade() {
-        return quantidade;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-
-
-    public void setProdutoNome(String produtoNome) {
-        this.produtoNome = produtoNome;
-    }
-
-    public void setValorCompra(String valorCompra) {
-        this.valorCompra = valorCompra;
-    }
-
-    public void setValorVenda(String valorVenda) {
-        this.valorVenda = valorVenda;
-    }
-
-    public void setLucroEstimado(String lucroEstimado) {
-        this.lucroEstimado = lucroEstimado;
-    }
+    private double valorCompra;
+    private double valorVenda;
+    private double lucroEstimado;
+    private int quantidade;
 
     public long getId() {
         return id;
     }
 
-    public String getCodigo() {
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public int getCodigo() {
         return codigo;
     }
 
-
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
 
     public String getProdutoNome() {
         return produtoNome;
     }
 
-    public String getValorCompra() {
+    public void setProdutoNome(String produtoNome) {
+        this.produtoNome = produtoNome;
+    }
+
+    public double getValorCompra() {
         return valorCompra;
     }
 
-    public String getValorVenda() {
+    public void setValorCompra(double valorCompra) {
+        this.valorCompra = valorCompra;
+    }
+
+    public double getValorVenda() {
         return valorVenda;
     }
 
-    public String getLucroEstimado() {
+    public void setValorVenda(double valorVenda) {
+        this.valorVenda = valorVenda;
+    }
+
+    public double getLucroEstimado() {
         return lucroEstimado;
+    }
+
+    public void setLucroEstimado(double lucroEstimado) {
+        this.lucroEstimado = lucroEstimado;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 }

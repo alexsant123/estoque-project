@@ -13,7 +13,7 @@ public class indexcontroller {
   }
 
   @GetMapping("/saida")
-  public String saida() {
+  public  String saida() {
     return "/saida";
   }
 

@@ -1,76 +1,47 @@
 package estoque.service;
 
+import estoque.model.Saida;
 import estoque.repository.ProdutoRepository;
+import estoque.repository.SaidaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
+import java.time.LocalDate;
 
 @Service
 public class SaidaService {
 
-   @Autowired
-   private  ProdutoRepository produtoRepository ;
+    @Autowired
+    private ProdutoRepository produtoRepository;
+    @Autowired
+    private SaidaRepository saidaRepository;
 
 
-
-  public void processarSaida(String codigo, String quantidade, String valorVenda) {
-
-     String   qtd= produtoRepository.Findquantidadebycodigo(codigo);
-      int num_repository = Integer.parseInt(qtd);
-     int qtd_saida_int = Integer.parseInt(quantidade);
-
-     if (qtd_saida_int<num_repository) {
+    public void processarSaida(Integer codigo, Integer quantidade, double valor_venda, Model model) {
 
 
+        Integer qtd_repo = produtoRepository.Findquantidadebycodigo(codigo);
+
+        if (quantidade > qtd_repo) {
+
+            model.addAttribute(model.addAttribute("message", "numero não disponível no estoque"));
+        } else if (quantidade < qtd_repo) {
+
+            produtoRepository.updateQuantidade(codigo, quantidade);
+            LocalDate data = LocalDate.now();
+            Saida saida = new Saida();
+            saida.setDate(data);
+            saida.setQuantidade(quantidade);
+            saida.setValorVenda(valor_venda);
+            saidaRepository.save(saida);
 
 
+            model.addAttribute(model.addAttribute("message", "saida feita com sucesso"));
 
 
+        }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-         
-     }
-
-
-      System.out.println(qtd);
-
-
-
-
-
-
-
-  }
-
-
-
-
-
-
+    }
 }

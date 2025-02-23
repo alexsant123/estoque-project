@@ -38,6 +38,7 @@ public class SaidaService {
             saidaRepository.save(saida);
 
             model.addAttribute(model.addAttribute("message", "saida feita com sucesso"));
+            model.addAttribute(model.addAttribute("message", "saida feita com sucesso"));
 
 
         }

@@ -20,8 +20,9 @@ public interface ProdutoRepository extends CrudRepository<Produto, Long> {
     @Query("SELECT p.quantidade FROM Produto p WHERE p.codigo = :codigo")
     public Integer Findquantidadebycodigo(Integer codigo);
 
+
     @Modifying
     @Transactional
-    @Query("UPDATE Produto p SET p.quantidade = :quantidade WHERE p.codigo = :codigo")
+    @Query("UPDATE Produto p SET p.quantidade = p.quantidade - :quantidade WHERE p.codigo = :codigo")
     public void updateQuantidade(Integer codigo, Integer quantidade);
 }

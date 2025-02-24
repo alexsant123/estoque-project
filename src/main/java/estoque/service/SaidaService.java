@@ -23,7 +23,7 @@ public class SaidaService {
 
         Integer qtd_repo = produtoRepository.Findquantidadebycodigo(codigo);
 
-        if (quantidade > qtd_repo && quantidade==null) {
+        if (quantidade > qtd_repo || quantidade==null) {
 
             model.addAttribute(model.addAttribute("message", "numero não disponível no estoque"));
         } else if (quantidade < qtd_repo) {

@@ -18,31 +18,35 @@ public class SaidaService {
     private SaidaRepository saidaRepository;
 
 
-    public void processarSaida(Integer codigo, Integer quantidade, double valor_venda, Model model) {
+    public void processarSaida(int codigo, int quantidade, double valor_venda, Model model) {
 
+
+        if ( quantidade <= 0) {
+            model.addAttribute("message", "Quantidade inválida.");
+            return;
+        }
 
         Integer qtd_repo = produtoRepository.Findquantidadebycodigo(codigo);
 
-        if (quantidade > qtd_repo || quantidade==null) {
+        if (quantidade > qtd_repo) {
+            model.addAttribute("message", "Número não disponível no estoque.");
+        } else {
 
-            model.addAttribute(model.addAttribute("message", "numero não disponível no estoque"));
-        } else if (quantidade < qtd_repo) {
+            // Update the stock quantity after the sale
+            produtoRepository.updateQuantidade(codigo, qtd_repo - quantidade);
 
-            produtoRepository.updateQuantidade(codigo, quantidade);
+            // Create a new Saida record
             LocalDate data = LocalDate.now();
             Saida saida = new Saida();
             saida.setDate(data);
             saida.setQuantidade(quantidade);
             saida.setValorVenda(valor_venda);
             saida.setProduto(produtoRepository.findbyCodigo(codigo));
+
             saidaRepository.save(saida);
 
-            model.addAttribute(model.addAttribute("message", "saida feita com sucesso"));
-            model.addAttribute(model.addAttribute("message", "saida feita com sucesso"));
-
-
+            model.addAttribute("message", "Saída feita com sucesso.");
         }
-
 
     }
 }

@@ -19,7 +19,7 @@ public class SaidaController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/saidaProdutos")
     @ResponseBody
-    public ModelAndView tirarDoEstoque(Integer codigo, Integer quantidade, double valorVenda, Model model) {
+    public ModelAndView tirarDoEstoque(int codigo, int quantidade, double valorVenda, Model model) {
 
 
         saidaService.processarSaida(codigo, quantidade, valorVenda, model);

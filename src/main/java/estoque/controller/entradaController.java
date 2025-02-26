@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import static estoque.controller.indexcontroller.index;
 
 @Controller
 public class entradaController {
@@ -23,10 +22,13 @@ public class entradaController {
     @RequestMapping(method = RequestMethod.POST,value = "/salvar")
     public String salvar(Produto produto , Model model) {
 
+
+
         entradaService.salvarEntrada(model,produto);
         System.out.println(produto.getCodigo());
         System.out.println(produto.getProdutoNome());
-     return index();
+
+     return "entrada";
  }
 
 

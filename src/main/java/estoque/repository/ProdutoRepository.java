@@ -11,14 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ProdutoRepository extends CrudRepository<Produto, Long> {
 
 
-    @Query(value = "select p from Produto p where  p.codigo = ?1")
+    @Query(value = "select  p from Produto p where  p.codigo = ?1")
     public Produto findbyCodigo(int codigo);
-
-    @Query(value = "select p from Produto p where  p.codigo = ?1")
-    public Integer FindbyCodigo(int codigo);
-
-    @Query("SELECT p.quantidade FROM Produto p WHERE p.codigo = :codigo")
-    public Integer Findquantidadebycodigo(int codigo);
 
 
     @Modifying
@@ -27,5 +21,9 @@ public interface ProdutoRepository extends CrudRepository<Produto, Long> {
     public void updateQuantidade(int codigo, int quantidade);
 
     @Query(value = "select p from Produto p where  p.produtoNome = ?1")
-    public String findByName(String produtoNome);
+    public Produto findByName(String produtoNome);
+
+    public boolean existsByCodigo(int codigo);
+
+    public boolean existsByProdutoNome(String produtoNome);
 }

@@ -16,11 +16,11 @@ public class Produto implements Serializable {
     private long id;
 
 
-
     private int codigo;
 
 
     private String produtoNome;
+
     private double valorCompra;
     private double valorVenda;
     private double lucroEstimado;

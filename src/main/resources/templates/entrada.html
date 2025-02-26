@@ -40,7 +40,9 @@
 
             <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
-    </div>
+    <div th:if="${message}" th:text="${message}"></div>
+
+</div>
 
 </body>
 </html>

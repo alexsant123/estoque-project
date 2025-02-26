@@ -1,5 +1,6 @@
 package estoque.service;
 
+import estoque.model.Produto;
 import estoque.model.Saida;
 import estoque.repository.ProdutoRepository;
 import estoque.repository.SaidaRepository;
@@ -18,30 +19,27 @@ public class SaidaService {
     private SaidaRepository saidaRepository;
 
 
-    public void processarSaida(int codigo, int quantidade, double valor_venda, Model model) {
+    public void processarSaida( Saida saida , Model model,int  codigo) {
 
 
-        if ( quantidade <= 0) {
+        if ( saida.getQuantidade() <= 0) {
             model.addAttribute("message", "Quantidade inválida.");
             return;
         }
 
-        Integer qtd_repo = produtoRepository.Findquantidadebycodigo(codigo);
+        Produto produto_repo=produtoRepository.findbyCodigo(codigo);
 
-        if (quantidade > qtd_repo) {
+
+        if (saida.getQuantidade() > produto_repo.getQuantidade()) {
             model.addAttribute("message", "Número não disponível no estoque.");
         } else {
 
-            // Update the stock quantity after the sale
-            produtoRepository.updateQuantidade(codigo, qtd_repo - quantidade);
+            produtoRepository.updateQuantidade(codigo, produto_repo.getQuantidade() - saida.getQuantidade());
 
-            // Create a new Saida record
             LocalDate data = LocalDate.now();
-            Saida saida = new Saida();
+
             saida.setDate(data);
-            saida.setQuantidade(quantidade);
-            saida.setValorVenda(valor_venda);
-            saida.setProduto(produtoRepository.findbyCodigo(codigo));
+            saida.setProduto(produto_repo);
 
             saidaRepository.save(saida);
 

@@ -1,6 +1,7 @@
 package estoque.controller;
 
 import estoque.model.Produto;
+import estoque.model.Saida;
 import estoque.service.SaidaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,13 +20,13 @@ public class SaidaController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/saidaProdutos")
     @ResponseBody
-    public ModelAndView tirarDoEstoque(int codigo, int quantidade, double valorVenda, Model model) {
+    public String tirarDoEstoque(Saida saida, Model model, int codigo) {
 
 
-        saidaService.processarSaida(codigo, quantidade, valorVenda, model);
+        saidaService.processarSaida(saida, model,codigo);
 
 
-        return Saidapage();
+        return "Saida";
 
     }
     @RequestMapping("/saida")

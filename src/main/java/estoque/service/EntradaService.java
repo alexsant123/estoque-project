@@ -5,6 +5,7 @@ import estoque.model.Produto;
 import estoque.repository.EntradaRepository;
 import estoque.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -17,45 +18,35 @@ import java.util.Date;
 public class EntradaService {
 
 
-
- @Autowired
- private ProdutoRepository produtoRepository;
-@Autowired
- private EntradaRepository entradaRepository;
-
-
-    public void salvarEntrada(Model model,Produto produto){
+    @Autowired
+    private ProdutoRepository produtoRepository;
+    @Autowired
+    private EntradaRepository entradaRepository;
 
 
-        int codigo_repo=produtoRepository.Findquantidadebycodigo(produto.getCodigo());
-       String name_repo=produtoRepository.findByName(produto.getProdutoNome());
+    public void salvarEntrada(Model model, Produto produto) {
 
 
+        if ((produtoRepository.existsByCodigo(produto.getCodigo())==true|| (produtoRepository.existsByProdutoNome(produto.getProdutoNome()) == true ))){
 
-        if ((produto.getQuantidade()==codigo_repo) || name_repo==produto.getProdutoNome()){
+            model.addAttribute("message", "código ou nome do produto já existente");
 
-
-            model.addAttribute("message", "código ou nome de produto já cadastrado");
-
-
-        }else {
-
+        } else {
             LocalDate data = LocalDate.now();
 
             Entrada entrada = new Entrada();
             entrada.setDate(data);
             entrada.setProduto(produto);
-            produtoRepository.save(produto);
 
-            entradaRepository.save(entrada);
-            model.addAttribute("message", "entrada realizada com sucesso");
+            produtoRepository.save(produto);  // Salva o produto no banco
+            entradaRepository.save(entrada);  // Salva a entrada no banco
+
+            model.addAttribute("message", "Entrada realizada com sucesso");
         }
-
-
     }
+}
 
 
 
 
-    }
 

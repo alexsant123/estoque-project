@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import static estoque.controller.indexcontroller.saida;
+
 @Controller
 public class SaidaController {
 
@@ -19,23 +21,20 @@ public class SaidaController {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/saidaProdutos")
-    @ResponseBody
     public String tirarDoEstoque(Saida saida, Model model, int codigo) {
 
+        if ( saida.getQuantidade() <= 0) {
 
-        saidaService.processarSaida(saida, model,codigo);
+            return model.addAttribute("message", "Quantidade inválida.").toString();
+        }else {
+            saidaService.processarSaida(saida, model,codigo);
+        }
 
 
-        return "Saida";
 
-    }
-    @RequestMapping("/saida")
-    @ResponseBody
-    public ModelAndView Saidapage(){
 
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("saida.html");
-        return mv;
+        return  "saida";
 
     }
+
 }

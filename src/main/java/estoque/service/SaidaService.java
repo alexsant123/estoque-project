@@ -22,10 +22,6 @@ public class SaidaService {
     public void processarSaida( Saida saida , Model model,int  codigo) {
 
 
-        if ( saida.getQuantidade() <= 0) {
-            model.addAttribute("message", "Quantidade inválida.");
-            return;
-        }
 
         Produto produto_repo=produtoRepository.findbyCodigo(codigo);
 
@@ -43,8 +39,13 @@ public class SaidaService {
 
             saidaRepository.save(saida);
 
+
             model.addAttribute("message", "Saída feita com sucesso.");
         }
 
     }
+
+
+
+
 }

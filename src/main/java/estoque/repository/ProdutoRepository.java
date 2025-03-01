@@ -23,6 +23,8 @@ public interface ProdutoRepository extends CrudRepository<Produto, Long> {
     @Query(value = "select p from Produto p where  p.produtoNome = ?1")
     public Produto findByName(String produtoNome);
 
+    public Iterable<Produto> findAll();
+
     public boolean existsByCodigo(int codigo);
 
     public boolean existsByProdutoNome(String produtoNome);

@@ -5,14 +5,13 @@ import estoque.model.Produto;
 import estoque.repository.EntradaRepository;
 import estoque.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
 
 @Service
 public class EntradaService {
@@ -44,7 +43,12 @@ public class EntradaService {
             model.addAttribute("message", "Entrada realizada com sucesso");
         }
     }
-}
+     public Iterable<Produto>  listarProdutos(){
+        Iterable <Produto> produtos=produtoRepository.findAll();
+
+     return produtos;
+     }
+    }
 
 
 

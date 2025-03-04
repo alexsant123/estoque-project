@@ -95,9 +95,13 @@
 
             <button type="submit" class="btn-custom">Enviar</button>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                Lista produtos
-            </button>
+
+
+            <a th:href="@{/listaProdutos}">
+                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                    Lista produtos
+                </button>
+            </a>
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -123,11 +127,12 @@
                                 </thead>
                                 <tbody>
                                 <!-- Iterate over the products list -->
-                                <tr th:each="product : ${products}">
-                                    <th scope="row" th:text="${product.id}"></th>
-                                    <td th:text="${product.nomeProduto}"></td>
-                                    <td th:text="${product.preco}"></td>
-                                    <td th:text="${product.categoria}"></td>
+                                <tr th:each="produto : ${produtos}">
+                                    <th scope="row" th:text="${produto.codigo}"></th>
+                                    <td th:text="${produto.nomeProduto}"></td>
+                                    <td th:text="${produto.valorCompra}"></td>
+                                    <td th:text="${product.lucroEstimado}"></td>
+
                                 </tr>
                                 </tbody>
                             </table>

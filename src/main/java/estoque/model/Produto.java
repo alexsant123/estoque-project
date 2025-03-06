@@ -26,6 +26,15 @@ public class Produto implements Serializable {
     private double lucroEstimado;
     private int quantidade;
 
+    public  Produto(int codigo, String produtoNome, double valorCompra, double valorVenda, double lucroEstimado, int quantidade) {
+        this.codigo = codigo;
+        this.produtoNome = produtoNome;
+        this.valorCompra = valorCompra;
+        this.valorVenda = valorVenda;
+        this.lucroEstimado = lucroEstimado;
+        this.quantidade = quantidade;
+    }
+protected Produto() {}
     public long getId() {
         return id;
     }
@@ -80,5 +89,17 @@ public class Produto implements Serializable {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    @Override
+    public String toString() {
+        return "Produto{" +
+                "quantidade=" + quantidade +
+                ", lucroEstimado=" + lucroEstimado +
+                ", valorVenda=" + valorVenda +
+                ", valorCompra=" + valorCompra +
+                ", produtoNome='" + produtoNome + '\'' +
+                ", codigo=" + codigo +
+                '}';
     }
 }

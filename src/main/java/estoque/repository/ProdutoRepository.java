@@ -7,6 +7,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public interface ProdutoRepository extends CrudRepository<Produto, Long> {
 
@@ -23,7 +25,6 @@ public interface ProdutoRepository extends CrudRepository<Produto, Long> {
     @Query(value = "select p from Produto p where  p.produtoNome = ?1")
     public Produto findByName(String produtoNome);
 
-    public Iterable<Produto> findAll();
 
     public boolean existsByCodigo(int codigo);
 

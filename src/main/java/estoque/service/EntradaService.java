@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class EntradaService {
@@ -42,12 +43,18 @@ public class EntradaService {
 
             model.addAttribute("message", "Entrada realizada com sucesso");
         }
-    }
-     public Iterable<Produto>  listarProdutos(){
-        Iterable <Produto> produtos=produtoRepository.findAll();
 
-     return produtos;
-     }
+
+    }
+
+    public List<Produto> listarProdutos() {
+        List<Produto> produtos = (List<Produto>) produtoRepository.findAll();
+        for (Produto produto : produtos) {
+            System.out.println(produto);  // Isso chamará o método toString() de cada Produto
+        }
+        return produtos;
+    }
+
     }
 
 

@@ -47,17 +47,6 @@ public class EntradaService {
 
     }
 
-    public List<Produto> listarProdutos() {
-        List<Produto> produtos = (List<Produto>) produtoRepository.findAll();
-        for (Produto produto : produtos) {
-            System.out.println(produto);  // Isso chamará o método toString() de cada Produto
-        }
-        return produtos;
-    }
-
-    }
 
 
-
-
-
+}

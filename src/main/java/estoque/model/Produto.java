@@ -34,7 +34,7 @@ public class Produto implements Serializable {
         this.lucroEstimado = lucroEstimado;
         this.quantidade = quantidade;
     }
-protected Produto() {}
+    public Produto() {}
     public long getId() {
         return id;
     }

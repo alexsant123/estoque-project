@@ -10,9 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import java.util.*;
 
 
 @Controller
@@ -33,22 +34,29 @@ public class entradaController {
         System.out.println(produto.getCodigo());
         System.out.println(produto.getProdutoNome());
 
-     return "entrada";
- }
+        return "redirect:/entrada";
+    }
 
-
+    // No seu controller
     @GetMapping("/produtos")
-    public String listarProdutos(Model model) {
-        List<Produto> produtos = entradaService.listarProdutos();  // ou produtoRepository.findAll();
-        model.addAttribute("produtos", produtos);
-        return "entrada";  // Retorne o nome correto do seu template
+    @ResponseBody  // Isso faz com que o Spring retorne os dados como JSON
+    public List<Produto> listarProdutos() {
+        // Aqui você pode recuperar a lista de produtos do banco de dados ou de outra fonte
+        List<Produto> produtos = (List<Produto>) produtoRepository.findAll();  // Exemplo de consulta ao repositório
+
+        return produtos;  // Retorna a lista no formato JSON
+    }
+
+
+
+
+    @GetMapping("/listaprodutos")
+    public static String listar () {
+
+        return "/listaprodutos";
     }
 
 
 
 
 }
-
-
-
-

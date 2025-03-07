@@ -31,19 +31,5 @@ class EstoqueProjectApplicationTests {
 	@Autowired
 	private ProdutoRepository produtoRepository;  // Supondo que você tenha um repositório
 
-	@Test
-	public void listarProdutosTest() throws Exception {
-		// Criação de dados no banco de dados para o teste
-		Produto produto1 = new Produto(5, "Produto 1", 10.0, 20.0, 10.0, 100);
-		Produto produto2 = new Produto(2, "Produto 2", 15.0, 25.0, 12.0, 200);
 
-		// Salvar no banco de dados
-		produtoRepository.save(produto1);
-		produtoRepository.save(produto2);
-
-		// Realiza o teste com MockMvc
-		mockMvc.perform(get("/produtos"))
-				.andExpect(status().isOk())  // Verifica se o status é 200 OK
-				.andExpect(view().name("entrada"));  // Verifica se a view renderizada é "entrada"
-	}
 }

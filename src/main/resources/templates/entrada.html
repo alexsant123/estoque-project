@@ -84,55 +84,19 @@
 
         <button type="submit" class="btn-custom">Enviar</button>
     </form>
-
-    <button type="button" class="btn-custom" data-toggle="modal" data-target="#exampleModalCenter">
-        Lista de Produtos
-    </button>
-
     <div th:if="${message}" th:text="${message}"></div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Lista de Produtos</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th scope="col">Código</th>
-                            <th scope="col">Nome do Produto</th>
-                            <th scope="col">Valor de Compra</th>
-                            <th scope="col">Valor de Venda</th>
-                            <th scope="col">Lucro Estimado</th>
-                            <th scope="col">Quantidade</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <!-- Iterando sobre a lista de produtos -->
-                        <tr th:each="produto : ${produtos}">
-                            <th scope="row" th:text="${produto.codigo}"></th>
-                            <td th:text="${produto.produtoNome}"></td>
-                            <td th:text="${produto.valorCompra}"></td>
-                            <td th:text="${produto.valorVenda}"></td>
-                            <td th:text="${produto.lucroEstimado}"></td>
-                            <td th:text="${produto.quantidade}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    <a href="/listaprodutos" class="btn-custom">
+        Lista de Produtos
+    </a>
+
+
+
 </div>
+
+
+<!-- Adicionando um teste para ver os dados -->
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

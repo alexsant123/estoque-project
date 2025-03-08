@@ -26,6 +26,9 @@ public class Entrada implements Serializable {
     @JoinColumn(name = "produto_id", nullable = true, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "produto_fk"))
     private Produto produto;
 
+
+    private int quantidade;
+
     @Column(nullable = true)
     private LocalDate date;
 
@@ -47,5 +50,21 @@ public class Entrada implements Serializable {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

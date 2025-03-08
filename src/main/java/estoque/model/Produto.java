@@ -24,15 +24,15 @@ public class Produto implements Serializable {
     private double valorCompra;
     private double valorVenda;
     private double lucroEstimado;
+
     private int quantidade;
 
-    public  Produto(int codigo, String produtoNome, double valorCompra, double valorVenda, double lucroEstimado, int quantidade) {
+    public  Produto(int codigo, String produtoNome, double valorCompra, double valorVenda, double lucroEstimado) {
         this.codigo = codigo;
         this.produtoNome = produtoNome;
         this.valorCompra = valorCompra;
         this.valorVenda = valorVenda;
         this.lucroEstimado = lucroEstimado;
-        this.quantidade = quantidade;
     }
     public Produto() {}
     public long getId() {

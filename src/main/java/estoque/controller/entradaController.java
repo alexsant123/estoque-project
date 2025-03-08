@@ -1,7 +1,9 @@
 package estoque.controller;
 
 
+import estoque.model.Entrada;
 import estoque.model.Produto;
+import estoque.repository.EntradaRepository;
 import estoque.repository.ProdutoRepository;
 import estoque.service.EntradaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ public class entradaController {
     private EntradaService entradaService;
     @Autowired
     private ProdutoRepository produtoRepository;
+    @Autowired
+    EntradaRepository entradaRepository;
 
 
     @RequestMapping(method = RequestMethod.POST,value = "/salvar")
@@ -47,6 +51,14 @@ public class entradaController {
         return produtos;  // Retorna a lista no formato JSON
     }
 
+    @GetMapping("/entradas")
+    @ResponseBody  // Isso faz com que o Spring retorne os dados como JSON
+    public List<Entrada> listarEntrada() {
+        // Aqui você pode recuperar a lista de produtos do banco de dados ou de outra fonte
+        List<Entrada> entradas = (List<Entrada>) entradaRepository.findAll();  // Exemplo de consulta ao repositório
+
+        return entradas;  // Retorna a lista no formato JSON
+    }
 
 
 

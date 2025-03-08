@@ -51,6 +51,13 @@
 
 <body>
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="container d-flex flex-column justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="">
+            <a href="/index">
+                <button type="submit" class="btn-custom">voltar</button>
+            </a>
+
+        </div>
     <form action="/saidaProdutos" method="post" >
         <div class="form-group">
             <label for="codigo">Código</label>
@@ -69,9 +76,10 @@
 
         <button type="submit" class="btn-custom">Enviar</button>
     </form>
-</div>
+        <div th:if="${message}" th:text="${message}"></div>
 
-<div th:if="${message}" th:text="${message}"></div>
+    </div>
+
 
 
 </body>

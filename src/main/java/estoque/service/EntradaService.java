@@ -37,7 +37,7 @@ public class EntradaService {
             Entrada entrada = new Entrada();
             entrada.setDate(data);
             entrada.setProduto(produto);
-
+            entrada.setQuantidade(produto.getQuantidade());
             produtoRepository.save(produto);  // Salva o produto no banco
             entradaRepository.save(entrada);  // Salva a entrada no banco
 

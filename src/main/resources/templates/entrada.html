@@ -50,6 +50,13 @@
 
             background-color: #8D6E63;
         }
+        #produtosTable {
+            background-color: #f0f0f0;  /* Fundo cinza claro para a tabela de produtos */
+        }
+
+        #entradasTable {
+            background-color: #e0e0e0;  /* Fundo cinza mais escuro para a tabela de entradas */
+        }
     </style>
 </head>
 <body>
@@ -103,32 +110,32 @@
 <!-- Botão para carregar as entradas -->
 
 <!-- Modal para exibir a tabela -->
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<!-- Modal de Entradas -->
+<div class="modal fade" id="entradasModal" tabindex="-1" role="dialog" aria-labelledby="entradasModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <table class="table table-sm" id="entradasTable">
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Produto ID</th> <!-- Exibe o ID do produto -->
+                    <th>Produto ID</th>
                     <th>Data</th>
                     <th>Quantidade</th>
                 </tr>
                 </thead>
                 <tbody>
-                <!-- Os dados das entradas serão carregados aqui -->
+                <!-- Dados das entradas serão carregados aqui -->
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
-
-
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<!-- Modal de Produtos -->
+<div class="modal fade" id="produtosModal" tabindex="-1" role="dialog" aria-labelledby="produtosModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-            <table class="table table-sm"   id="produtosTable">
+            <table class="table table-sm" id="produtosTable">
                 <thead>
                 <tr>
                     <th>Código</th>
@@ -140,12 +147,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <!-- Os dados serão carregados aqui -->
+                <!-- Dados dos produtos serão carregados aqui -->
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -153,29 +161,71 @@
 
 <script>
     $(document).ready(function() {
+        // Abrir modal de entradas
+        $('#loadEntradas').click(function() {
+            // Fazer requisição para carregar as entradas
+            $.ajax({
+                url: '/entradas',
+                type: 'GET',
+                success: function(data) {
+                    $('#entradasTable tbody').empty(); // Limpa a tabela antes de preencher
+
+                    if (data.length > 0) {
+                        data.forEach(function(entrada) {
+                            let produtoId = entrada.produto;
+                            if (entrada.produto && typeof entrada.produto === 'object') {
+                                produtoId = entrada.produto.id;
+                            }
+
+                            $('#entradasTable tbody').append(`
+                            <tr>
+                                <td>${entrada.id}</td>
+                                <td>${produtoId}</td>
+                                <td>${entrada.data}</td>
+                                <td>${entrada.quantidade}</td>
+                            </tr>
+                        `);
+                        });
+                    } else {
+                        alert('Nenhuma entrada encontrada.');
+                    }
+
+                    // Exibir o modal de entradas
+                    $('#entradasModal').modal('show');
+                },
+                error: function() {
+                    alert('Erro ao carregar as entradas.');
+                }
+            });
+        });
+
         $('#loadProdutos').click(function() {
+            // Fazer requisição para carregar os produtos
             $.ajax({
                 url: '/produtos',
                 type: 'GET',
                 success: function(data) {
-                    $('#produtosTable tbody').empty();
+                    $('#produtosTable tbody').empty(); // Limpa a tabela antes de preencher
 
                     if (data.length > 0) {
                         data.forEach(function(produto) {
                             $('#produtosTable tbody').append(`
-                                <tr>
-                                    <td>${produto.codigo}</td>
-                                    <td>${produto.produtoNome}</td>
-                                    <td>${produto.quantidade}</td>
-                                    <td>${produto.valorCompra}</td>
-                                    <td>${produto.valorVenda}</td>
-                                    <td>${produto.lucroEstimado}</td>
-                                </tr>
-                            `);
+                            <tr>
+                                <td>${produto.codigo}</td>
+                                <td>${produto.produtoNome}</td>
+                                <td>${produto.quantidade}</td>
+                                <td>${produto.valorCompra}</td>
+                                <td>${produto.valorVenda}</td>
+                                <td>${produto.lucroEstimado}</td>
+                            </tr>
+                        `);
                         });
                     } else {
                         alert('Nenhum produto encontrado.');
                     }
+
+                    // Exibir o modal de produtos
+                    $('#produtosModal').modal('show');
                 },
                 error: function() {
                     alert('Erro ao carregar os produtos.');
@@ -183,6 +233,7 @@
             });
         });
     });
+
 </script>
 <script>
     $(document).ready(function() {

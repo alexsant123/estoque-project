@@ -14,20 +14,15 @@ public class Produto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_produto")
     private long id;
-
-
     private int codigo;
-
-
     private String produtoNome;
-
     private double valorCompra;
     private double valorVenda;
     private double lucroEstimado;
-
     private int quantidade;
 
-    public  Produto(int codigo, String produtoNome, double valorCompra, double valorVenda, double lucroEstimado) {
+    public  Produto(int codigo, String produtoNome, double valorCompra, double valorVenda, double lucroEstimado, long  id) {
+        this.id = id;
         this.codigo = codigo;
         this.produtoNome = produtoNome;
         this.valorCompra = valorCompra;

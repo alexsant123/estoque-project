@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.time.LocalDate;
 import java.util.List;
 
+import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
+
 @Service
 public class EntradaService {
 
@@ -30,7 +32,6 @@ public class EntradaService {
         if ((produtoRepository.existsByCodigo(produto.getCodigo())==true|| (produtoRepository.existsByProdutoNome(produto.getProdutoNome()) == true ))){
 
             model.addAttribute("message", "código ou nome do produto já existente");
-
         } else {
             LocalDate data = LocalDate.now();
 
@@ -44,7 +45,9 @@ public class EntradaService {
             model.addAttribute("message", "Entrada realizada com sucesso");
         }
 
-
+    }
+    public Iterable<Entrada> findAll() {
+        return entradaRepository.findAll(); // Obtendo todas as entradas
     }
 
 

@@ -3,6 +3,7 @@ package estoque.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 
 import jakarta.persistence.*;
 
@@ -67,6 +68,20 @@ public class Saida implements Serializable {
 
     public void setValorVenda(double valorVenda) {
         this.valor_venda = valorVenda;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Saida saida = (Saida) o;
+        return Objects.equals(produto, saida.produto);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(produto);
     }
 }
 

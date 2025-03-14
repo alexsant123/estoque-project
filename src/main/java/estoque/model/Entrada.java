@@ -29,7 +29,7 @@ public class Entrada implements Serializable {
 
     private int quantidade;
 
-    @Column(nullable = true)
+    @Column(name = "date")
     private LocalDate date;
 
     public Entrada() {
@@ -67,4 +67,13 @@ public class Entrada implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    @Override
+    public String toString() {
+        return "Entrada{" +
+                "id=" + id +
+                ", data=" + date +
+                ", quantidade=" + quantidade +
+                '}';
+    }
+
 }

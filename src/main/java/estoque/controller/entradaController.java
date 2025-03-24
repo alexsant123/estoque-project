@@ -58,8 +58,7 @@ public class entradaController {
     public  Iterable<Entrada>listarentradas(Model model) {
         ModelAndView mv = new ModelAndView("entrada");
         List<Entrada> entradas = (List<Entrada>) entradaRepository.findAll();
-        dashboardService.somarProdutos();
-        dashboardService.contarQuantidade();
+
         return entradas;
     }
 

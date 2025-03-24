@@ -3,6 +3,7 @@ package estoque.controller;
 import estoque.model.Produto;
 import estoque.model.Saida;
 import estoque.repository.SaidaRepository;
+import estoque.service.DashboardService;
 import estoque.service.SaidaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,9 @@ import java.util.List;
 @Controller
 public class SaidaController {
 
+
+    @Autowired
+    DashboardService dashboardService;
     @Autowired
     SaidaService saidaService;
 
@@ -34,10 +38,6 @@ public class SaidaController {
         }else {
             saidaService.processarSaida(saida, model,codigo);
         }
-
-
-
-
         return  "saida";
 
     }
@@ -45,9 +45,11 @@ public class SaidaController {
     @ResponseBody
     public List<Saida> getSaidas() {
         List<Saida> saidas = (List<Saida>) saidaRepository.findAll();  //
-
+       dashboardService.lucroTotal();
         return ResponseEntity.ok(saidas).getBody();  // Retorna a lista como resposta JSON
 
     }
+
+
 
 }

@@ -66,6 +66,11 @@ public class Saida implements Serializable {
         return valor_venda;
     }
 
+    public int getIntvalorVenda() {
+    int qtd_venda= (int) getValorVenda();
+        return qtd_venda;
+    }
+
     public void setValorVenda(double valorVenda) {
         this.valor_venda = valorVenda;
     }

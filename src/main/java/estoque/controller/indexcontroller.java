@@ -3,6 +3,7 @@ package estoque.controller;
 
 import estoque.model.Entrada;
 import estoque.repository.EntradaRepository;
+import estoque.service.DashboardService;
 import estoque.service.EntradaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,10 @@ public class indexcontroller {
     return "/saida";
   }
   @GetMapping("/dashboard")
-  public static String dashboard() {
+  public static String dashboard(Model model) {
+
+
+    model.addAttribute("message",  "80");
     return "/dashboard";
 
   }

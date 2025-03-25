@@ -6,67 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Produtos</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
     <style>
-        .modal-dialog {
-            max-width: 700px;
-            margin: 1.75rem auto;
+        .quadro {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            display: inline-block;
+            text-align: center;
+            line-height: 100px; /* Centraliza o número verticalmente */
+            border: 2px solid black;
+            font-size: 24px;
+            font-weight: bold;
         }
-    </Style>
+    </style>
 </head>
 <body>
 
-<!-- Botão para abrir o Modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-    Lista produtos
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Lista de Produtos</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">Código</th>
-                        <th scope="col">Nome do Produto</th>
-                        <th scope="col">Valor de Compra</th>
-                        <th scope="col">Valor de Venda</th>
-                        <th scope="col">Lucro Estimado</th>
-                        <th scope="col">Quantidade</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- Iterando sobre a lista de produtos -->
-                    <tr th:each="produto : ${produtos}">
-                        <th scope="row" th:text="${produto.codigo}"></th>
-                        <td th:text="${produto.nomeProduto}"></td>
-                        <td th:text="${produto.valorCompra}"></td>
-                        <td th:text="${produto.valorVenda}"></td>
-                        <td th:text="${produto.lucroEstimado}"></td>
-                        <td th:text="${produto.quantidade}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary">Salvar alterações</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Inclua o JS do jQuery e o JS do Bootstrap -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<div class="quadro" th:text="${message}"></div>
 </body>
 </html>
 

@@ -28,4 +28,7 @@ public interface ProdutoRepository extends CrudRepository<Produto, Long> {
 
 
     public boolean existsByProdutoNome(String produtoNome);
+
+    @Query(value = "select  p from Produto p where  p.codigo = ?1")
+    Produto findByCodigo(Long codigoMaisFrequente);
 }

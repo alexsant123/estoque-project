@@ -18,6 +18,9 @@ import java.util.List;
 @Controller
 public class indexcontroller {
 
+  @Autowired
+  static DashboardService dashboardService;
+
 @Autowired
   EntradaRepository entradaRepository;
   @GetMapping("/entrada")
@@ -29,14 +32,7 @@ public class indexcontroller {
   public static String saida() {
     return "/saida";
   }
-  @GetMapping("/dashboard")
-  public static String dashboard(Model model) {
 
-
-    model.addAttribute("message",  "80");
-    return "/dashboard";
-
-  }
   @GetMapping("/index")
   public static String index() {
     return "/index";

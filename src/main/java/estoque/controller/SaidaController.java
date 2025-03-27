@@ -45,7 +45,6 @@ public class SaidaController {
     @ResponseBody
     public List<Saida> getSaidas() {
         List<Saida> saidas = (List<Saida>) saidaRepository.findAll();  //
-       dashboardService.lucroTotal();
         return ResponseEntity.ok(saidas).getBody();  // Retorna a lista como resposta JSON
 
     }

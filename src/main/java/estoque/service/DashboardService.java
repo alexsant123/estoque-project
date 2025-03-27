@@ -52,20 +52,22 @@ public class DashboardService {
 
     }
 
-    public void maisVendido_codigo() {
+    public String  maisVendido_codigo() {
 
 
         List<Saida> saidas = (List<Saida>) saidaRepository.findAll();
         Map<Long, Integer> frequencias = new HashMap<>();
 
+// Contando a frequência de cada produto
         for (Saida saida : saidas) {
-            Long codigoProduto = (long) saida.getProduto().getCodigo();  // Obtem o código do produto
+            Long codigoProduto = (long) saida.getProduto().getCodigo();  // Obtém o código do produto
             frequencias.put(codigoProduto, frequencias.getOrDefault(codigoProduto, 0) + 1);
         }
 
         Long codigoMaisFrequente = null;
         int maiorFrequencia = 0;
 
+// Encontrando o código do produto mais frequente
         for (Map.Entry<Long, Integer> entry : frequencias.entrySet()) {
             if (entry.getValue() > maiorFrequencia) {
                 codigoMaisFrequente = entry.getKey();
@@ -73,13 +75,25 @@ public class DashboardService {
             }
         }
 
-        System.out.println(codigoMaisFrequente);
+// Agora você tem o código do produto mais frequente. Vamos buscar o nome desse produto.
+        Produto produtoMaisFrequente = produtoRepository.findByCodigo(codigoMaisFrequente); // Supondo que você tenha um método findByCodigo no repositório
+
+        String nomeProdutoMaisFrequente = null;
+
+        if (produtoMaisFrequente != null) {
+            nomeProdutoMaisFrequente = produtoMaisFrequente.getProdutoNome(); // Pegando o nome do produto
+        }
+
+        System.out.println("Produto mais frequente: " + nomeProdutoMaisFrequente);
+return nomeProdutoMaisFrequente;
     }
 
-   public void lucroTotal(){
+
+   public Integer lucroTotal(){
         List<Saida> saidas = (List<Saida>) saidaRepository.findAll();
        Integer lucroTotal = saidas.stream().mapToInt(Saida::getIntvalorVenda).sum();
         System.out.println(lucroTotal);
+        return lucroTotal;
     }
 
 

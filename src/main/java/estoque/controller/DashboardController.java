@@ -18,9 +18,14 @@ public class DashboardController {
         dashboardService.maisVendido_codigo();
         Integer lucroTotal = dashboardService.lucroTotal();
         String produtomaisvendido=dashboardService.maisVendido_codigo();
-
+        Integer  contarProdutosRequistrados= Math.toIntExact(dashboardService.contarProdutosRequistrados());
+        Integer unidades_produtos=dashboardService.contar_unidades_de_todos_os_produtos();
+        double ticketmedio=dashboardService.ticketmedio();
         model.addAttribute("lucroTotal", lucroTotal);
         model.addAttribute("produtomaisvendido", produtomaisvendido);
+        model.addAttribute("produtoscadastrados",contarProdutosRequistrados);
+        model.addAttribute("unidades",unidades_produtos);
+        model.addAttribute("ticketmedio",ticketmedio);
 
         return "/dashboard";
     }

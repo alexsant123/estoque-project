@@ -19,7 +19,8 @@
             font-weight: bold;
         }
         .card {
-            width: 100px; /* Largura fixa para o card */
+            margin: 10px;
+            width: 120px; /* Largura fixa para o card */
             height: 100px; /* Altura fixa para o card (para manter a forma quadrada) */
             background-color: #4CAF50; /* Cor de fundo verde */
             color: white; /* Cor do texto */
@@ -43,15 +44,37 @@
         .card span {
             font-weight: bold; /* Deixa o valor do lucro em negrito */
         }
+        .card-header{
+            padding: 10px;
+            display: flex;
+
+        }
     </style>
 </head>
 <body>
+<div class="card-header">
+<div class="card">
+    <p>Total Lucro:   R$<span th:text="${lucroTotal}"></span></p>
+</div>
 
 <div class="card">
-    <p>Total Lucro:  R$  <span th:text="${lucroTotal}"></span></p>
-</div></body>
-<div class="card">
-    <p>Produto mais vendido:  R$  <span th:text="${produtomaisvendido}"></span></p>
-</div></body>
+    <p>Produto mais vendido:  <span th:text="${produtomaisvendido}"></span></p>
+</div>
+
+    <div class="card">
+    <p>Produtos cadastrados:  <span th:text="${produtoscadastrados}"></span></p>
+    </div>
+
+    <div class="card">
+        <p>Unidades de produtos no estoque  <span th:text="${unidades}"></span></p>
+    </div>
+
+    <div class="card">
+        <p>média <span th:text="${ticketmedio}"></span></p>
+    </div>
+
+</div>
+
+</body>
 </html>
 

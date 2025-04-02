@@ -95,7 +95,13 @@ return nomeProdutoMaisFrequente;
         System.out.println(lucroTotal);
         return lucroTotal;
     }
+  public Double ticketmedio(){
+      List<Saida> saidas = (List<Saida>) saidaRepository.findAll();
+     Integer numsaidas= Math.toIntExact(saidas.stream().count());
+      double ticket =saidas.stream().mapToInt(Saida::getIntvalorVenda).sum()/numsaidas;
 
+      return (double) ticket;
+}
 
 
 

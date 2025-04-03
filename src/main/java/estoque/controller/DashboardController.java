@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.Map;
+
 @Controller
 public class DashboardController {
 
@@ -21,12 +23,18 @@ public class DashboardController {
         Integer  contarProdutosRequistrados= Math.toIntExact(dashboardService.contarProdutosRequistrados());
         Integer unidades_produtos=dashboardService.contar_unidades_de_todos_os_produtos();
         double ticketmedio=dashboardService.ticketmedio();
-        model.addAttribute("lucroTotal", lucroTotal);
+
+        Map<String, Long> contagemPorMes = dashboardService.contarSaidasPorMes();
+        model.addAttribute("contagemPorMes", contagemPorMes);
+         model.addAttribute("lucroTotal", lucroTotal);
         model.addAttribute("produtomaisvendido", produtomaisvendido);
         model.addAttribute("produtoscadastrados",contarProdutosRequistrados);
         model.addAttribute("unidades",unidades_produtos);
         model.addAttribute("ticketmedio",ticketmedio);
-
-        return "/dashboard";
+         return "/dashboard";
     }
+
+
+
+
 }

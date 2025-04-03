@@ -7,10 +7,13 @@ import estoque.repository.ProdutoRepository;
 import estoque.repository.SaidaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.server.session.InMemoryWebSessionStore;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.Month;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @Service
@@ -52,7 +55,7 @@ public class DashboardService {
 
     }
 
-    public String  maisVendido_codigo() {
+    public String maisVendido_codigo() {
 
 
         List<Saida> saidas = (List<Saida>) saidaRepository.findAll();
@@ -75,8 +78,7 @@ public class DashboardService {
             }
         }
 
-// Agora você tem o código do produto mais frequente. Vamos buscar o nome desse produto.
-        Produto produtoMaisFrequente = produtoRepository.findByCodigo(codigoMaisFrequente); // Supondo que você tenha um método findByCodigo no repositório
+        Produto produtoMaisFrequente = produtoRepository.findByCodigo(codigoMaisFrequente);
 
         String nomeProdutoMaisFrequente = null;
 
@@ -85,27 +87,43 @@ public class DashboardService {
         }
 
         System.out.println("Produto mais frequente: " + nomeProdutoMaisFrequente);
-return nomeProdutoMaisFrequente;
+        return nomeProdutoMaisFrequente;
     }
 
 
-   public Integer lucroTotal(){
+    public Integer lucroTotal() {
         List<Saida> saidas = (List<Saida>) saidaRepository.findAll();
-       Integer lucroTotal = saidas.stream().mapToInt(Saida::getIntvalorVenda).sum();
+        Integer lucroTotal = saidas.stream().mapToInt(Saida::getIntvalorVenda).sum();
         System.out.println(lucroTotal);
         return lucroTotal;
     }
-  public Double ticketmedio(){
-      List<Saida> saidas = (List<Saida>) saidaRepository.findAll();
-     Integer numsaidas= Math.toIntExact(saidas.stream().count());
-      double ticket =saidas.stream().mapToInt(Saida::getIntvalorVenda).sum()/numsaidas;
 
-      return (double) ticket;
+    public Double ticketmedio() {
+        List<Saida> saidas = (List<Saida>) saidaRepository.findAll();
+        Integer numsaidas = Math.toIntExact(saidas.stream().count());
+        double ticket = saidas.stream().mapToInt(Saida::getIntvalorVenda).sum() / numsaidas;
+
+        return (double) ticket;
+    }
+
+
+
+   public Map <String, Long> contarSaidasPorMes() {
+        List<Saida> saidas = (List<Saida>) saidaRepository.findAll();
+
+        // Agrupa por ano e mês e conta a quantidade de saídas
+        return saidas.stream()
+                .map(Saida::getDate)  // Extrai o atributo 'data' de cada Saida
+                .collect(Collectors.groupingBy(data -> Month.of(data.getMonthValue())
+                                .getDisplayName(java.time.format.TextStyle.FULL, new Locale("PT", "BR")).toUpperCase(),
+                        Collectors.counting()));    }
 }
 
 
 
-    }
+
+
+
 
 
 

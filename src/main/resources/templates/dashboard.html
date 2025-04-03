@@ -7,22 +7,15 @@
     <title>Lista de Produtos</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .quadro {
-            width: 100px;
-            height: 100px;
-            margin: 10px;
-            display: inline-block;
-            text-align: center;
-            line-height: 100px; /* Centraliza o número verticalmente */
-            border: 2px solid black;
-            font-size: 24px;
-            font-weight: bold;
+        body {
+            background-color: #3E2723;
         }
-        .card {
+
+        .card,h4 {
+            background-color:#8D6E63;
             margin: 10px;
-            width: 120px; /* Largura fixa para o card */
+            width: 150px; /* Largura fixa para o card */
             height: 100px; /* Altura fixa para o card (para manter a forma quadrada) */
-            background-color: #4CAF50; /* Cor de fundo verde */
             color: white; /* Cor do texto */
             display: flex; /* Flexbox para centralizar o conteúdo */
             justify-content: center; /* Alinha o conteúdo horizontalmente */
@@ -31,10 +24,7 @@
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
             font-size: 18px; /* Tamanho da fonte */
             text-align: center; /* Alinha o texto ao centro */
-            transition: transform 0.3s ease-in-out; /* Efeito de transição para animação */
         }
-
-
 
         .card p {
             margin: 0; /* Remove margens do parágrafo */
@@ -44,15 +34,58 @@
         .card span {
             font-weight: bold; /* Deixa o valor do lucro em negrito */
         }
-        .card-header{
+        .cardd{
+            justify-content: center;
             padding: 10px;
             display: flex;
 
         }
+        .btn-custom{
+            background-color:#D7CCC8;
+            border: 2px solid #8D6E63;
+            border-radius: .25rem;
+            padding: .375rem .75rem;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #6A4E42;
+        }
+
+        .row-container{
+            display: flex;
+            flex-direction: column;
+        }
+        .voltar{
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+
+        }
+        table{
+             line-clamp: inherit;
+             border: 2px solid #8D6E63;
+             width: 10%;
+            height: 10%;
+        }
+        th, td {
+            color: #D7CCC8;
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #8D6E63;  /* Linha/ Borda entre as células */
+        }
+
     </style>
 </head>
 <body>
-<div class="card-header">
+
+<div class="row-container">
+<div class="voltar">
+    <a href="/index">
+        <button type="submit" class="btn-custom">voltar</button>
+    </a>
+
+</div>
+<div class="cardd">
+
 <div class="card">
     <p>Total Lucro:   R$<span th:text="${lucroTotal}"></span></p>
 </div>
@@ -70,11 +103,31 @@
     </div>
 
     <div class="card">
-        <p>média <span th:text="${ticketmedio}"></span></p>
+        <p>ticket médio R$<span th:text="${ticketmedio}"></span> </p>
     </div>
 
 </div>
+</div>
+<div class="tabela">
 
+    <h4>Contagem de Saídas por Mês</h4>
+    <table>
+        <thead>
+        <tr>
+            <th>Mês</th>
+            <th>Quantidade</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entry : ${contagemPorMes}">
+
+            <td th:text="${entry.key}"></td> <!-- Exibe o ano-mês -->
+            <td th:text="${entry.value}"></td> <!-- Exibe a quantidade -->
+        </tr>
+        </tbody>
+    </table>
+
+</div>
 </body>
 </html>
 

@@ -23,14 +23,16 @@ public class DashboardController {
         Integer  contarProdutosRequistrados= Math.toIntExact(dashboardService.contarProdutosRequistrados());
         Integer unidades_produtos=dashboardService.contar_unidades_de_todos_os_produtos();
         double ticketmedio=dashboardService.ticketmedio();
-
         Map<String, Long> contagemPorMes = dashboardService.contarSaidasPorMes();
+        Map<String, Long> contagemEntradaPorMes = dashboardService.contarEntradasPorMes();
+
         model.addAttribute("contagemPorMes", contagemPorMes);
-         model.addAttribute("lucroTotal", lucroTotal);
+        model.addAttribute("lucroTotal", lucroTotal);
         model.addAttribute("produtomaisvendido", produtomaisvendido);
         model.addAttribute("produtoscadastrados",contarProdutosRequistrados);
         model.addAttribute("unidades",unidades_produtos);
         model.addAttribute("ticketmedio",ticketmedio);
+        model.addAttribute("contagemEntradaPorMes",contagemEntradaPorMes);
          return "/dashboard";
     }
 

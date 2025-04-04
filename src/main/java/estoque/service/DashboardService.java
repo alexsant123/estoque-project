@@ -1,5 +1,6 @@
 package estoque.service;
 
+import estoque.model.Entrada;
 import estoque.model.Produto;
 import estoque.model.Saida;
 import estoque.repository.EntradaRepository;
@@ -25,6 +26,8 @@ public class DashboardService {
     private EntradaRepository entradaRepository;
     @Autowired
     SaidaRepository saidaRepository;
+    @Autowired
+    EntradaService entradaService;
 
     public long somarProdutos() {
 
@@ -107,8 +110,7 @@ public class DashboardService {
     }
 
 
-
-   public Map <String, Long> contarSaidasPorMes() {
+    public Map<String, Long> contarSaidasPorMes() {
         List<Saida> saidas = (List<Saida>) saidaRepository.findAll();
 
         // Agrupa por ano e mês e conta a quantidade de saídas
@@ -116,8 +118,35 @@ public class DashboardService {
                 .map(Saida::getDate)  // Extrai o atributo 'data' de cada Saida
                 .collect(Collectors.groupingBy(data -> Month.of(data.getMonthValue())
                                 .getDisplayName(java.time.format.TextStyle.FULL, new Locale("PT", "BR")).toUpperCase(),
-                        Collectors.counting()));    }
+                        Collectors.counting()));
+    }
+
+
+    public Map<String, Long> contarEntradasPorMes() {
+        List<Entrada> entradas = (List<Entrada>) entradaService.findAll();
+
+        // Cria um mapa com todos os meses do ano e valor inicial 0
+        Map<String, Long> mesesComContagem = Arrays.stream(Month.values())
+                .collect(Collectors.toMap(
+                        month -> month.getDisplayName(java.time.format.TextStyle.FULL, new Locale("PT", "BR")).toUpperCase(),
+                        month -> 0L));  // Inicializa com 0 para cada mês
+
+        // Agrupa as entradas por mês e conta a quantidade
+        entradas.stream()
+                .map(Entrada::getDate)  // Extrai a data de cada entrada
+                .collect(Collectors.groupingBy(
+                        data -> Month.of(data.getMonthValue())
+                                .getDisplayName(java.time.format.TextStyle.FULL, new Locale("PT", "BR")).toUpperCase(),
+                        Collectors.counting())) // Conta as ocorrências por mês
+                .forEach((mes, count) -> mesesComContagem.put(mes, count));  // Atualiza o mapa com as contagens reais
+
+        return mesesComContagem;
+    }
 }
+
+
+
+
 
 
 

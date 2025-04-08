@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.server.session.InMemoryWebSessionStore;
+import java.time.LocalDate;
 
 import java.time.Month;
 import java.util.*;
@@ -113,34 +114,53 @@ public class DashboardService {
     public Map<String, Long> contarSaidasPorMes() {
         List<Saida> saidas = (List<Saida>) saidaRepository.findAll();
 
-        // Agrupa por ano e mês e conta a quantidade de saídas
-        return saidas.stream()
-                .map(Saida::getDate)  // Extrai o atributo 'data' de cada Saida
-                .collect(Collectors.groupingBy(data -> Month.of(data.getMonthValue())
-                                .getDisplayName(java.time.format.TextStyle.FULL, new Locale("PT", "BR")).toUpperCase(),
-                        Collectors.counting()));
+        // Conta as saídas por mês
+        Map<Month, Long> contagemPorMes = saidas.stream()
+                .map(Saida::getDate)
+                .collect(Collectors.groupingBy(LocalDate::getMonth, Collectors.counting()));
+
+        // Cria um mapa ordenado de janeiro a dezembro com todos os meses (até os com 0)
+        Map<String, Long> resultadoFinal = new LinkedHashMap<>();
+        Locale localeBR = new Locale("pt", "BR");
+
+        for (Month mes : Month.values()) {
+            String nomeMes = mes.getDisplayName(java.time.format.TextStyle.FULL, localeBR).toUpperCase();
+            resultadoFinal.put(nomeMes, contagemPorMes.getOrDefault(mes, 0L));
+        }
+
+        return resultadoFinal;
     }
 
 
     public Map<String, Long> contarEntradasPorMes() {
         List<Entrada> entradas = (List<Entrada>) entradaService.findAll();
 
-        // Cria um mapa com todos os meses do ano e valor inicial 0
-        Map<String, Long> mesesComContagem = Arrays.stream(Month.values())
-                .collect(Collectors.toMap(
-                        month -> month.getDisplayName(java.time.format.TextStyle.FULL, new Locale("PT", "BR")).toUpperCase(),
-                        month -> 0L));  // Inicializa com 0 para cada mês
+        Locale localeBR = new Locale("pt", "BR");
+
+        // Cria um mapa ordenado com todos os meses do ano e valor inicial 0
+        Map<String, Long> mesesComContagem = new LinkedHashMap<>();
+        for (Month mes : Month.values()) {
+            String nomeMes = mes.getDisplayName(java.time.format.TextStyle.FULL, localeBR).toUpperCase();
+            mesesComContagem.put(nomeMes, 0L);
+        }
 
         // Agrupa as entradas por mês e conta a quantidade
-        entradas.stream()
-                .map(Entrada::getDate)  // Extrai a data de cada entrada
+        Map<String, Long> contagemReal = entradas.stream()
+                .map(Entrada::getDate)
                 .collect(Collectors.groupingBy(
-                        data -> Month.of(data.getMonthValue())
-                                .getDisplayName(java.time.format.TextStyle.FULL, new Locale("PT", "BR")).toUpperCase(),
-                        Collectors.counting())) // Conta as ocorrências por mês
-                .forEach((mes, count) -> mesesComContagem.put(mes, count));  // Atualiza o mapa com as contagens reais
+                        data -> data.getMonth()
+                                .getDisplayName(java.time.format.TextStyle.FULL, localeBR).toUpperCase(),
+                        Collectors.counting()
+                ));
+
+        // Atualiza os valores no mapa ordenado
+        contagemReal.forEach(mesesComContagem::put);
 
         return mesesComContagem;
+    }
+
+    public List<Produto> gastos_Com_produtos() {
+        return (List<Produto>) produtoRepository.findAll();
     }
 }
 

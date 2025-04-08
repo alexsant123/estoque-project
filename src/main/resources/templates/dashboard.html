@@ -77,11 +77,16 @@
             align-items: center;
         }
         .tabela{
-          padding: 20px;
-        }
+            border-radius: 15px; /* Bordas arredondadas */
+            box-shadow: 3px 6px 6px rgba(0.0, 0, 0, 0.5); /* Sombra sutil */
+            padding: 10px;
+            gap: 20px;        }
         .tabela-container{
-            display: flex;
-        }
+            margin: 10px;
+             display: flex;
+            gap: 50px;
+            justify-content: flex-start;
+         }
 
     </style>
 </head>
@@ -165,7 +170,26 @@
         </tr>
         </tbody>
     </table>
+
  </div>
+    <div class="tabela">
+        <h4>Gastos com produto</h4>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Nome do Produto</th>
+            <th>Valor de compra</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="produto : ${produtos}">
+            <td th:text="${produto.produtoNome}">Nome</td>
+            <td th:text="${produto.valorCompra}">Valor de Venda</td>
+        </tr>
+        </tbody>
+    </table>
+        </div>
 </div>
 </body>
 </html>

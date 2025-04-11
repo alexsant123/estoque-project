@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.*;
 
 
+
 @Controller
 public class entradaController {
 
@@ -62,6 +63,17 @@ public class entradaController {
         return entradas;
     }
 
+
+    @PostMapping("/novaentrada")
+    public String salvarEntrada(@ModelAttribute Produto produto) {
+        System.out.println("Código: " + produto.getCodigo());
+        System.out.println("Quantidade: " + produto.getQuantidade());
+        System.out.println("Valor Compra: " + produto.getValorCompra());
+        System.out.println("Valor Venda: " + produto.getValorVenda());
+
+        // Aqui você pode salvar no banco, fazer lógica, etc.
+        return "redirect:/algumLugar"; // redireciona pra alguma página depois
+    }
 
 
 

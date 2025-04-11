@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import static java.lang.System.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -44,12 +45,14 @@ public class EntradaService {
 
             model.addAttribute("message", "Entrada realizada com sucesso");
         }
-
     }
+
     public Iterable<Entrada> findAll() {
         return entradaRepository.findAll(); // Obtendo todas as entradas
     }
 
-
+    public void addNovaEntrada(Model model, Entrada entrada) {
+      System.out.println(entrada.toString());
+  }
 
 }

@@ -131,22 +131,22 @@
             </div>
             <!-- Corpo do Modal (Formulário) -->
             <div class="modal-body">
-                <<form method="POST" th:action="@{/novaentrada}" th:object="${produto}">
+                <form   >
                 <div class="form-group">
                     <label for="codigo">Código</label>
-                    <input type="number" class="form-control" th:field="*{codigo}" placeholder="Digite o código" min="0" required>
+                    <input type="number" class="form-control" placeholder="Digite o código" min="0" required>
                 </div>
                 <div class="form-group">
                     <label for="quantidade">Quantidade</label>
-                    <input type="number" class="form-control" th:field="*{quantidade}" placeholder="Digite a quantidade" min="1" required>
+                    <input type="number" class="form-control"   placeholder="Digite a quantidade" min="1" required>
                 </div>
                 <div class="form-group">
                     <label for="valorCompra">Valor de Compra</label>
-                    <input type="number" class="form-control" th:field="*{valorCompra}" placeholder="Digite o valor de compra" step="0.01" min="0" required>
+                    <input type="number" class="form-control"  placeholder="Digite o valor de compra" step="0.01" min="0" required>
                 </div>
                 <div class="form-group">
                     <label for="valorVenda">Valor de Venda</label>
-                    <input type="number" class="form-control" th:field="*{valorVenda}" placeholder="Digite o valor de venda" step="0.01" min="0" required>
+                    <input type="number" class="form-control"   placeholder="Digite o valor de venda" step="0.01" min="0" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Enviar</button>
             </form>
@@ -225,7 +225,7 @@
                         data.forEach(function(entrada) {
                             let produtoId = entrada.produto;
                             if (entrada.produto && typeof entrada.produto === 'object') {
-                                produtoId = entrada.produto.id;
+                                produtoId = entrada.produto.codigo;
                             }
                             let dataFormatada = moment(entrada.data).isValid() ? moment(entrada.data).format('DD/MM/YYYY') : 'Data inválida';
 

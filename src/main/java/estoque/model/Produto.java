@@ -17,6 +17,7 @@ public class Produto implements Serializable {
     private int codigo;
     private String produtoNome;
     private double valorCompra;
+    private double valorCompraTotal;
     private double valorVenda;
     private double lucroEstimado;
     private int quantidade;
@@ -84,6 +85,14 @@ public class Produto implements Serializable {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public double getValorCompraTotal() {
+        return valorCompraTotal;
+    }
+
+    public void setValorCompraTotal(double valorCompraTotal) {
+        this.valorCompraTotal = valorCompraTotal;
     }
 
     @Override

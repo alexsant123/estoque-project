@@ -17,8 +17,7 @@ public class DashboardController {
     private DashboardService dashboardService;
 
     @GetMapping("/dashboard")
-    public
-    String dashboard(Model model) {
+    public String dashboard(Model model) {
         dashboardService.maisVendido_codigo();
         Integer lucroTotal = dashboardService.lucroTotal();
         String produtomaisvendido=dashboardService.maisVendido_codigo();

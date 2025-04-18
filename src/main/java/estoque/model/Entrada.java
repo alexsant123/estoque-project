@@ -27,10 +27,10 @@ public class Entrada implements Serializable {
 
     private int quantidade;
 
-    @Column(nullable = true )
-    private Double valorcompra;
-    @Column(nullable = true )
-    private Double  valorVendaSujerido;
+     private Double valorCompra;
+
+
+     private Double  valorVendaSujerido;
 
     @Column(name = "date")
     private LocalDate date;
@@ -40,16 +40,19 @@ public class Entrada implements Serializable {
 
     }
 
-    public double getValorcompra() {
-        return valorcompra;
+
+    public double getValorCompra() {
+        return valorCompra != null ? valorCompra : 0.0;
     }
 
-    public void setValorcompra(Double valorCompra) {
-        this.valorcompra = valorcompra;
-    }
+
 
     public double getValorVendaSujerido() {
         return valorVendaSujerido;
+    }
+
+    public void setValorCompra(Double valorCompra) {
+        this.valorCompra = valorCompra;
     }
 
     public void setValorVendaSujerido(Double valorVendaSujerido) {

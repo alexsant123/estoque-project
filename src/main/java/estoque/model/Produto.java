@@ -56,14 +56,14 @@ public class Produto implements Serializable {
     }
 
     public double getValorCompra() {
-        return valorCompra;
+        return valorCompra != null ? valorCompra : 0.0;
     }
 
     public void setValorCompra(Double valorCompra) {
         this.valorCompra = valorCompra;
     }
 
-    public double getValorVenda() {
+    public Double getValorVenda() {
         return valorVenda;
     }
 

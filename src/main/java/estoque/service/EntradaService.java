@@ -39,7 +39,7 @@ public class EntradaService {
              entrada.setDate(data);
             entrada.setProduto(produto);
             entrada.setQuantidade(produto.getQuantidade());
-            entrada.setValorcompra(produto.getValorCompra());
+            entrada.setValorCompra(produto.getValorCompra());
             entrada.setValorVendaSujerido(produto.getValorVenda());
             produtoRepository.save(produto);  // Salva o produto no banco
             entradaRepository.save(entrada);  // Salva a entrada no banco

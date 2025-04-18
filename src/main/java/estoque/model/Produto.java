@@ -16,10 +16,10 @@ public class Produto implements Serializable {
     private long id;
     private int codigo;
     private String produtoNome;
-    private double valorCompra;
-    private double valorCompraTotal;
-    private double valorVenda;
-    private double lucroEstimado;
+    private Double valorCompra;
+    private Double valorCompraTotal;
+    private Double valorVenda;
+    private Double lucroEstimado;
     private int quantidade;
 
     public  Produto(int codigo, String produtoNome, double valorCompra, double valorVenda, double lucroEstimado, long  id) {
@@ -59,7 +59,7 @@ public class Produto implements Serializable {
         return valorCompra;
     }
 
-    public void setValorCompra(double valorCompra) {
+    public void setValorCompra(Double valorCompra) {
         this.valorCompra = valorCompra;
     }
 
@@ -67,7 +67,7 @@ public class Produto implements Serializable {
         return valorVenda;
     }
 
-    public void setValorVenda(double valorVenda) {
+    public void setValorVenda(Double valorVenda) {
         this.valorVenda = valorVenda;
     }
 
@@ -75,7 +75,7 @@ public class Produto implements Serializable {
         return lucroEstimado;
     }
 
-    public void setLucroEstimado(double lucroEstimado) {
+    public void setLucroEstimado(Double lucroEstimado) {
         this.lucroEstimado = lucroEstimado;
     }
 

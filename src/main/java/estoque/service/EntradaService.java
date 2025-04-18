@@ -35,11 +35,12 @@ public class EntradaService {
             model.addAttribute("message", "código ou nome do produto já existente");
         } else {
             LocalDate data = LocalDate.now();
-
             Entrada entrada = new Entrada();
-            entrada.setDate(data);
+             entrada.setDate(data);
             entrada.setProduto(produto);
             entrada.setQuantidade(produto.getQuantidade());
+            entrada.setValorcompra(produto.getValorCompra());
+            entrada.setValorVendaSujerido(produto.getValorVenda());
             produtoRepository.save(produto);  // Salva o produto no banco
             entradaRepository.save(entrada);  // Salva a entrada no banco
 

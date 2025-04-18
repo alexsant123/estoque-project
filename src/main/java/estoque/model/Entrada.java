@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name = "entrada")
@@ -29,12 +27,33 @@ public class Entrada implements Serializable {
 
     private int quantidade;
 
+    @Column(nullable = true )
+    private Double valorcompra;
+    @Column(nullable = true )
+    private Double  valorVendaSujerido;
+
     @Column(name = "date")
     private LocalDate date;
 
 
     public Entrada() {
 
+    }
+
+    public double getValorcompra() {
+        return valorcompra;
+    }
+
+    public void setValorcompra(Double valorCompra) {
+        this.valorcompra = valorcompra;
+    }
+
+    public double getValorVendaSujerido() {
+        return valorVendaSujerido;
+    }
+
+    public void setValorVendaSujerido(Double valorVendaSujerido) {
+        this.valorVendaSujerido = valorVendaSujerido;
     }
 
     public Produto getProduto() {

@@ -35,7 +35,7 @@ public class entradaController {
 
 
     @PostMapping( value = "/salvar")
-    public String salvar(Produto produto, Model model) {
+    public String salvar(Produto produto, Model model ) {
 
 
         entradaService.salvarEntrada(model, produto);
@@ -64,7 +64,7 @@ public class entradaController {
     }
 
 
-     public String salvarEntrada(@ModelAttribute Produto produto) {
+     public String salvarEntrada( Produto produto) {
         System.out.println("Código: " + produto.getCodigo());
         System.out.println("Quantidade: " + produto.getQuantidade());
         System.out.println("Valor Compra: " + produto.getValorCompra());

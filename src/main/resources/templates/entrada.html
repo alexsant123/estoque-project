@@ -167,7 +167,7 @@
             <table class="table table-sm" id="entradasTable">
                 <thead>
                 <tr>
-                    <th>Produto ID</th>
+                    <th>Produto nome</th>
                     <th>Data</th>
                     <th>Quantidade</th>
                 </tr>
@@ -223,9 +223,9 @@
 
                     if (data.length > 0) {
                         data.forEach(function(entrada) {
-                            let produtoId = entrada.produto;
+                            let produtoId = entrada.produto.produtoNome;
                             if (entrada.produto && typeof entrada.produto === 'object') {
-                                produtoId = entrada.produto.codigo;
+                                produtoId = entrada.produto.produtoNome;
                             }
                             let dataFormatada = moment(entrada.data).isValid() ? moment(entrada.data).format('DD/MM/YYYY') : 'Data inválida';
 

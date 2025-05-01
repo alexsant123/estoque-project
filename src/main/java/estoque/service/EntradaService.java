@@ -7,15 +7,8 @@ import estoque.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-import static java.lang.System.*;
 
 import java.time.LocalDate;
-import java.util.List;
-
-import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
 
 @Service
 public class EntradaService {
@@ -55,5 +48,7 @@ public class EntradaService {
     public void addNovaEntrada(Model model, Entrada entrada) {
       System.out.println(entrada.toString());
   }
-
+    public Iterable<Produto> findAlll() {
+        return produtoRepository.findAll(); // Obtendo todas as entradas
+    }
 }

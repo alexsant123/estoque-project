@@ -45,13 +45,19 @@ public class entradaController {
         return "entrada";
     }
 
-    @GetMapping("/produtos")
-    @ResponseBody
-    public List<Produto> listarProdutos() {
-        List<Produto> produtos = (List<Produto>) produtoRepository.findAll();  // Exemplo de consulta ao repositório
 
-        return produtos;  // Retorna a lista no formato JSON
+
+
+
+
+    @GetMapping("/listaprodutos")
+    public String listarProdutos(Model model) {
+        List<Produto> produtos = (List<Produto>) entradaService.findAlll();  // Exemplo de consulta ao repositório
+        model.addAttribute("produtos", produtos);
+        return "entrada"; // Substitua pelo nome da sua página Thymeleaf
     }
+
+
 
 
     @GetMapping("/entradas")

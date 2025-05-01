@@ -87,7 +87,7 @@ public class Produto implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public double getValorCompraTotal() {
+    public Double getValorCompraTotal() {
         return valorCompraTotal;
     }
 

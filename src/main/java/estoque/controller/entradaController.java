@@ -60,17 +60,16 @@ public class entradaController {
 
 
 
-    @GetMapping("/entradas")
-    @ResponseBody
-    public  Iterable<Entrada>listarentradas(Model model) {
-        ModelAndView mv = new ModelAndView("entrada");
-        List<Entrada> entradas = (List<Entrada>) entradaRepository.findAll();
-
-        return entradas;
+    @GetMapping("/listaentradas")
+    public String listarEntradas(Model model) {
+        List<Entrada> entradas = (List<Entrada>) entradaService.findAll();  // Exemplo de consulta ao repositório
+        model.addAttribute("entradas", entradas);
+        return "entrada";
     }
 
 
-     public String salvarEntrada( Produto produto) {
+
+    public String salvarEntrada( Produto produto) {
         System.out.println("Código: " + produto.getCodigo());
         System.out.println("Quantidade: " + produto.getQuantidade());
         System.out.println("Valor Compra: " + produto.getValorCompra());

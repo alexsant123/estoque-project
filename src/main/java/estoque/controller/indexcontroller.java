@@ -24,24 +24,23 @@ public class indexcontroller {
 @Autowired
   EntradaRepository entradaRepository;
   @GetMapping("/entrada")
-  public static String entrada() {
+  public  String entrada() {
     return "/entrada";
   }
 
   @GetMapping("/saida")
-  public static String saida() {
+  public  String saida() {
     return "/saida";
   }
 
   @GetMapping("/index")
-  public static String index() {
+  public  String index() {
     return "/index";
   }
-  //@GetMapping("/lista")
-  public String mostrarEntradas(Model model) {
+  @GetMapping("/entradanova")
+  public String entradanova() {
 
-
-    return "/lista"; // Nome do template Thymeleaf
+    return "/entradanova"; // Nome do template Thymeleaf
   }
 
 

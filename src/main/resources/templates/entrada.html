@@ -44,9 +44,7 @@
             color:#6A4E42;
         }
 
-        .container{
-            border: none;
-        }
+
         .table {
             margin: 10px;
             width: 90%;
@@ -95,25 +93,15 @@
             font-size: 14px;
             color: #F5F5F5;
         }
-        a.custom {
-            text-decoration: none;        /* remove o sublinhado */
-            color:  #6A4E42;               /* mantém a cor igual ao botão */
-        }
-
-        a.custom:hover {
-            text-decoration: none;        /* impede que volte a sublinhar no hover */
-            color:  #6A4E42;               /* impede mudança de cor no hover */
-        }
 
 
     </style>
 </head>
 <body>
 <div class="container d-flex flex-column justify-content-center align-items-center" style="min-height: 100vh;">
-    <div class="custom">
-        <a href="/index">
-            <button type="submit" >voltar</button>
-        </a>
+    <div>
+        <button type="button" class="custom">voltar</button>
+
 
     </div>
     <h2 class="text-center">Cadastro de Produto</h2>

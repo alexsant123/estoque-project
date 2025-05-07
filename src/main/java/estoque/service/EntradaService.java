@@ -20,26 +20,30 @@ public class EntradaService {
     private EntradaRepository entradaRepository;
 
 
-    public void salvarEntrada(Model model, Produto produto) {
 
 
-        if ((produtoRepository.existsByCodigo(produto.getCodigo())==true|| (produtoRepository.existsByProdutoNome(produto.getProdutoNome()) == true ))){
+        public void salvarEntrada(Model model, Produto produto, Entrada entrada){
 
-            model.addAttribute("message", "código ou nome do produto já existente");
-        } else {
-            LocalDate data = LocalDate.now();
-            Entrada entrada = new Entrada();
-             entrada.setDate(data);
-            entrada.setProduto(produto);
-            entrada.setQuantidade(produto.getQuantidade());
-            entrada.setValorCompra(produto.getValorCompra());
-            entrada.setValorVendaSujerido(produto.getValorVenda());
-            produtoRepository.save(produto);  // Salva o produto no banco
-            entradaRepository.save(entrada);  // Salva a entrada no banco
+            if (produto == null || entrada == null) {
+                model.addAttribute("message", "Erro: Produto ou Entrada inválidos.");
+                return;
+            }
 
-            model.addAttribute("message", "Entrada realizada com sucesso");
+            if (produtoRepository.existsByCodigo(produto.getCodigo()) ||
+                    produtoRepository.existsByProdutoNome(produto.getProdutoNome())) {
+
+                model.addAttribute("message", "Código ou nome do produto já existente");
+            } else {
+                LocalDate data = LocalDate.now();
+                produtoRepository.save(produto);
+
+                entrada.setDate(data);
+                entrada.setProduto(produto);
+                 entradaRepository.save(entrada);
+
+                model.addAttribute("message", "Entrada realizada com sucesso");
+            }
         }
-    }
 
     public Iterable<Entrada> findAll() {
         return entradaRepository.findAll(); // Obtendo todas as entradas

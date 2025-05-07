@@ -35,10 +35,11 @@ public class entradaController {
 
 
     @PostMapping( value = "/salvar")
-    public String salvar(Produto produto, Model model ) {
+    public String salvar(Produto produto, Model model ,Entrada entrada) {
 
-
-        entradaService.salvarEntrada(model, produto);
+     System.out.println("entrada: " + entrada);
+     System.out.println("produto: " + produto);
+        entradaService.salvarEntrada(model, produto,entrada);
         System.out.println(produto.getCodigo());
         System.out.println(produto.getProdutoNome());
 
@@ -48,12 +49,12 @@ public class entradaController {
 
 
 
-
-
     @GetMapping("/listaprodutos")
     public String listarProdutos(Model model) {
         List<Produto> produtos = (List<Produto>) entradaService.findAlll();  // Exemplo de consulta ao repositório
         model.addAttribute("produtos", produtos);
+        List<Entrada> entradas = (List<Entrada>) entradaService.findAll();  // Exemplo de consulta ao repositório
+        model.addAttribute("entradas", entradas);
         return "entrada"; // Substitua pelo nome da sua página Thymeleaf
     }
 
@@ -69,15 +70,7 @@ public class entradaController {
 
 
 
-    public String salvarEntrada( Produto produto) {
-        System.out.println("Código: " + produto.getCodigo());
-        System.out.println("Quantidade: " + produto.getQuantidade());
-        System.out.println("Valor Compra: " + produto.getValorCompra());
-        System.out.println("Valor Venda: " + produto.getValorVenda());
 
-        // Aqui você pode salvar no banco, fazer lógica, etc.
-        return "redirect:/entrada"; // redireciona pra alguma página depois
-    }
 
 
 

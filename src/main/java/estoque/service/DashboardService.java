@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 
 @Service
 public class DashboardService {
-
+/*
     @Autowired
     private ProdutoRepository produtoRepository;
     @Autowired
@@ -35,16 +35,12 @@ public class DashboardService {
         return produtoRepository.count();
     }
 
-    public int contar_unidades_de_todos_os_produtos() {
+    public void contar_unidades_de_todos_os_produtos() {
         // Consultando todos os produtos no repositório
         List<Produto> produtos = (List<Produto>) produtoRepository.findAll();
 
-        // Somando as quantidades usando Stream
-        int somaQuantidades = produtos.stream()
-                .mapToInt(Produto::getQuantidade)
-                .sum();
-        System.out.println(somaQuantidades);
-        return somaQuantidades;
+
+
     }
 
     public Long contarProdutosRequistrados() {
@@ -162,17 +158,6 @@ public class DashboardService {
     public List<Produto> gastos_Com_produtos() {
         return (List<Produto>) produtoRepository.findAll();
     }
+    /*
+ */
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

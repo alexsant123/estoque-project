@@ -14,9 +14,6 @@ public interface ProdutoRepository extends CrudRepository<Produto, Long> {
     @Query(value = "select  p from Produto p where  p.codigo = ?1")
     public Produto findbyCodigo(int codigo);
 
-    @Modifying
-    @Query("UPDATE Produto p SET p.quantidade = :quantidade WHERE p.codigo = :codigo")
-    void updateQuantidade(@Param("codigo") int codigo, @Param("quantidade") int quantidade);
 
 
     @Query(value = "select p from Produto p where  p.produtoNome = ?1")
@@ -29,6 +26,6 @@ public interface ProdutoRepository extends CrudRepository<Produto, Long> {
 
     public boolean existsByProdutoNome(String produtoNome);
 
-    @Query(value = "select  p from Produto p where  p.codigo = ?1")
-    Produto findByCodigo(Long codigoMaisFrequente);
+   // @Query(value = "select  p from Produto p where  p.codigo = ?1")
+    //Produto findByCodigo(Long codigoMaisFrequente);
 }

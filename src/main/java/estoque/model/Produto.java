@@ -3,6 +3,8 @@ package estoque.model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "produto")
@@ -16,28 +18,16 @@ public class Produto implements Serializable {
     private long id;
     private int codigo;
     private String produtoNome;
-    private Double valorCompra;
-    private Double valorCompraTotal;
-    private Double valorVenda;
-    private Double lucroEstimado;
-    private int quantidade;
+    private String descricao;
 
-    public  Produto(int codigo, String produtoNome, double valorCompra, double valorVenda, double lucroEstimado, long  id) {
-        this.id = id;
-        this.codigo = codigo;
-        this.produtoNome = produtoNome;
-        this.valorCompra = valorCompra;
-        this.valorVenda = valorVenda;
-        this.lucroEstimado = lucroEstimado;
-    }
-    public Produto() {}
-    public long getId() {
-        return id;
-    }
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Entrada> entradas = new ArrayList<>();
 
-    public void setId(long id) {
-        this.id = id;
-    }
+
+
+
+
+
 
     public int getCodigo() {
         return codigo;
@@ -45,6 +35,14 @@ public class Produto implements Serializable {
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public String getProdutoNome() {
@@ -55,55 +53,5 @@ public class Produto implements Serializable {
         this.produtoNome = produtoNome;
     }
 
-    public double getValorCompra() {
-        return valorCompra != null ? valorCompra : 0.0;
-    }
 
-    public void setValorCompra(Double valorCompra) {
-        this.valorCompra = valorCompra;
-    }
-
-    public Double getValorVenda() {
-        return valorVenda;
-    }
-
-    public void setValorVenda(Double valorVenda) {
-        this.valorVenda = valorVenda;
-    }
-
-    public double getLucroEstimado() {
-        return lucroEstimado;
-    }
-
-    public void setLucroEstimado(Double lucroEstimado) {
-        this.lucroEstimado = lucroEstimado;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public Double getValorCompraTotal() {
-        return valorCompraTotal;
-    }
-
-    public void setValorCompraTotal(double valorCompraTotal) {
-        this.valorCompraTotal = valorCompraTotal;
-    }
-
-    @Override
-    public String toString() {
-        return "Produto{" +
-                "quantidade=" + quantidade +
-                ", lucroEstimado=" + lucroEstimado +
-                ", valorVenda=" + valorVenda +
-                ", valorCompra=" + valorCompra +
-                ", produtoNome='" + produtoNome + '\'' +
-                ", codigo=" + codigo +
-                '}';
-    }
 }

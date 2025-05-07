@@ -117,6 +117,11 @@
         </div>
 
         <div class="form-group">
+            <label for="descricao">Descricao</label>
+            <input type="text" class="form-control" id="descricao" name="descricao" required>
+        </div>
+
+        <div class="form-group">
             <label for="quantidade">Quantidade</label>
             <input type="number" class="form-control" id="quantidade" name="quantidade" min="1" required>
         </div>
@@ -127,14 +132,11 @@
         </div>
 
         <div class="form-group">
-            <label for="valorvenda">Valor de Venda</label>
-            <input type="number" class="form-control" id="valorvenda" name="valorVenda" step="0.01" min="0" required>
+            <label for="valorVendaSujerido">valorVendaSujerido</label>
+            <input type="number" class="form-control" id="valorVendaSujerido" name="valorVendaSujerido" step="0.01" min="0" required>
         </div>
 
-        <div class="form-group">
-            <label for="lucroestimado">Lucro Estimado</label>
-            <input type="number" class="form-control" id="lucroestimado" name="lucroEstimado" step="0.01" min="0" required>
-        </div>
+
 
         <button type="submit" class="custom">Enviar</button>
         <a  class="custom" href="/listaprodutos"  >Lista de Produtos</a>
@@ -154,8 +156,8 @@
     <tr>
         <th>Código</th>
         <th>Nome do Produto</th>
-        <th>Quantidade</th>
-        <th>Valor de Compra Total</th>
+        <th>descricao</th>
+        <th>quantidade</th>
         <th>Valor de Venda</th>
     </tr>
     </thead>
@@ -163,9 +165,8 @@
     <tr th:each="produtos : ${produtos}">
         <td th:text="${produtos.codigo}">ID</td>
         <td th:text="${produtos.produtoNome}">Produto</td>
-        <td th:text="${produtos.quantidade}">Quantidade</td>
-        <td th:text="${produtos.valorCompraTotal}">Compra</td>
-        <td th:text="${produtos.valorVenda}">Venda</td>
+        <td th:text="${produtos.descricao}">Produto</td>
+     <tr th:each="entradas : ${entradas}">   <td th:text="${entradas.quantidade}">Qtd</td>
     </tr>
     </tbody>
 </table>
@@ -185,7 +186,7 @@
     <tr th:each="entradas : ${entradas}">
         <Td th:text="${entradas.produto.produtoNome}">nome</Td>
         <td th:text="${entradas.quantidade}">Quantidade</td>
-        <td th:text="${entradas.valorCompra}">Valor Compra</td>
+        <td th:text="${entradas.getValorCompra()}">Valor Compra</td>
         <td th:text="${entradas.valorVendaSujerido}">Valor Venda</td>
         <td th:text="${#temporals.format(entradas.date, 'dd/MM/yyyy')}">Data</td>
     </tr>

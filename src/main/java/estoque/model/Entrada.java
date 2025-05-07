@@ -21,15 +21,12 @@ public class Entrada implements Serializable {
 
 
     @ManyToOne
-    @JoinColumn(name = "produto_id", nullable = true, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "produto_fk"))
+    @JoinColumn(name = "produto_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "produto_fk"))
     private Produto produto;
 
 
     private int quantidade;
-
      private Double valorCompra;
-
-
      private Double  valorVendaSujerido;
 
     @Column(name = "date")
@@ -40,23 +37,12 @@ public class Entrada implements Serializable {
 
     }
 
-
-    public double getValorCompra() {
-        return valorCompra != null ? valorCompra : 0.0;
+    public int getQuantidade() {
+        return quantidade;
     }
 
-
-
-    public double getValorVendaSujerido() {
-        return valorVendaSujerido;
-    }
-
-    public void setValorCompra(Double valorCompra) {
-        this.valorCompra = valorCompra;
-    }
-
-    public void setValorVendaSujerido(Double valorVendaSujerido) {
-        this.valorVendaSujerido = valorVendaSujerido;
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
     public Produto getProduto() {
@@ -67,6 +53,22 @@ public class Entrada implements Serializable {
         this.produto = produto;
     }
 
+    public Double getValorCompra() {
+        return valorCompra;
+    }
+
+    public void setValorCompra(Double valorCompra) {
+        this.valorCompra = valorCompra;
+    }
+
+    public Double getValorVendaSujerido() {
+        return valorVendaSujerido;
+    }
+
+    public void setValorVendaSujerido(Double valorVendaSujerido) {
+        this.valorVendaSujerido = valorVendaSujerido;
+    }
+
     public LocalDate getDate() {
         return date;
     }
@@ -75,30 +77,14 @@ public class Entrada implements Serializable {
         this.date = date;
     }
 
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-
     @Override
     public String toString() {
         return "Entrada{" +
                 "id=" + id +
-                ", data=" + date +
-                ", quantidade=" + quantidade +
+                 ", quantidade=" + quantidade +
+                ", valorCompra=" + valorCompra +
+                ", valorVendaSujerido=" + valorVendaSujerido +
+                ", date=" + date +
                 '}';
     }
-
 }

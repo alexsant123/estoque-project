@@ -74,15 +74,10 @@
 
   </div>
   <h2 class="text-center">entrada nova</h2>
-  <form action="/salvar" method="post">
+  <form action="/salvarN" method="post">
     <div class="form-group">
       <label for="codigo">Código</label>
       <input type="number" class="form-control" id="codigo" name="codigo" required>
-    </div>
-
-    <div class="form-group">
-      <label for="nomedoproduto">Nome do Produto</label>
-      <input type="text" class="form-control" id="nomedoproduto" name="produtoNome" required>
     </div>
 
     <div class="form-group">
@@ -96,26 +91,17 @@
     </div>
 
     <div class="form-group">
-      <label for="valorvenda">Valor de Venda</label>
-      <input type="number" class="form-control" id="valorvenda" name="valorVenda" step="0.01" min="0" required>
-    </div>
-
-    <div class="form-group">
-      <label for="lucroestimado">Lucro Estimado</label>
-      <input type="number" class="form-control" id="lucroestimado" name="lucroEstimado" step="0.01" min="0" required>
+      <label for="valorVendaSujerido">valorVendaSujerido</label>
+      <input type="number" class="form-control" id="valorVendaSujerido" name="valorVendaSujerido" step="0.01" min="0" required>
     </div>
 
     <button type="submit" class="custom">Enviar</button>
-
     <p th:text="${message}" class="text-muted"></p>
 
   </form>
 
+
 </div>
-
-
-
-
 
 
 
@@ -125,7 +111,7 @@
 <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
 <script>
 
-</script>
+ </script>
 
 
 </body>

@@ -5,10 +5,13 @@ import estoque.model.Produto;
 import estoque.repository.EntradaRepository;
 import estoque.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
+
+
 
 @Service
 public class EntradaService {
@@ -22,17 +25,17 @@ public class EntradaService {
 
 
 
-        public void salvarEntrada(Model model, Produto produto, Entrada entrada){
+        public void salvarEntrada(ModelAndView modelAndView, Produto produto, Entrada entrada){
 
             if (produto == null || entrada == null) {
-                model.addAttribute("message", "Erro: Produto ou Entrada inválidos.");
+                modelAndView.addObject("message", "Erro: Produto ou Entrada inválidos.");
                 return;
             }
 
             if (produtoRepository.existsByCodigo(produto.getCodigo()) ||
                     produtoRepository.existsByProdutoNome(produto.getProdutoNome())) {
 
-                model.addAttribute("message", "Código ou nome do produto já existente");
+                modelAndView.addObject("message", "Código ou nome do produto já existente");
             } else {
                 LocalDate data = LocalDate.now();
                 produtoRepository.save(produto);
@@ -41,7 +44,7 @@ public class EntradaService {
                 entrada.setProduto(produto);
                  entradaRepository.save(entrada);
 
-                model.addAttribute("message", "Entrada realizada com sucesso");
+                modelAndView.addObject("message", "Entrada realizada com sucesso");
             }
         }
 
@@ -49,10 +52,14 @@ public class EntradaService {
         return entradaRepository.findAll(); // Obtendo todas as entradas
     }
 
-    public void addNovaEntrada(Model model, Entrada entrada) {
-      System.out.println(entrada.toString());
-  }
     public Iterable<Produto> findAlll() {
         return produtoRepository.findAll(); // Obtendo todas as entradas
+    }
+
+
+    public void salvarNovaEntrada(ModelAndView modelAndView, Entrada entrada,Produto produto){
+
+        modelAndView.addObject("message", "Entrada realizada com sucesso");
+
     }
 }

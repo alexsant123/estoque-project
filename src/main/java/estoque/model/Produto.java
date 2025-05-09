@@ -25,10 +25,6 @@ public class Produto implements Serializable {
 
 
 
-
-
-
-
     public int getCodigo() {
         return codigo;
     }

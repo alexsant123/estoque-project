@@ -46,14 +46,14 @@ public class entradaController {
         return modelAndView;
     }
     @PostMapping( value = "/salvarN")
-    public ModelAndView salvare(  ModelAndView modelAndView ,Entrada entrada,Produto produto) {
+    public ModelAndView salvarNE(   Entrada entrada,Produto produto) {
+        ModelAndView modelAndView = new ModelAndView("entradanova"); // nome da sua view
 
-      entradaService.salvarNovaEntrada(modelAndView,entrada,produto);
+         entradaService.salvarNovaEntrada(modelAndView,entrada,produto);
 
 
         return modelAndView;
     }
-
 
 
 
@@ -71,8 +71,8 @@ public class entradaController {
 
     @GetMapping("/listaentradas")
     public String listarEntradas(Model model) {
-        List<Entrada> entradas = (List<Entrada>) entradaService.findAll();  // Exemplo de consulta ao repositório
-        model.addAttribute("entradas", entradas);
+        List<Entrada> entrada = (List<Entrada>) entradaService.findAll();  // Exemplo de consulta ao repositório
+        model.addAttribute("entrada", entrada);
         return "entrada";
     }
 

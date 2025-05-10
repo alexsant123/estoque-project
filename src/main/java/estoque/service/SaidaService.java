@@ -24,7 +24,6 @@ public class SaidaService {
     public void processarSaida(Saida saida, Model model, int codigo) {
 
 
-        Produto produto_repo = produtoRepository.findbyCodigo(codigo);
 
         }
 

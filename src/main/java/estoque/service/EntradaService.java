@@ -59,7 +59,26 @@ public class EntradaService {
 
     public void salvarNovaEntrada(ModelAndView modelAndView, Entrada entrada,Produto produto){
 
-        modelAndView.addObject("message", "Entrada realizada com sucesso");
+        if (produto == null || entrada == null) {
+            modelAndView.addObject("message", "Erro: Produto ou Entrada inválidos.");
+            return;
+
+        } if(produtoRepository.existsByCodigo(produto.getCodigo())==false){
+
+            modelAndView.addObject("message", " codigo não corresponde a um produto");
+              return;
+        }
+
+
+            LocalDate data = LocalDate.now();
+            Produto p=produtoRepository.findByCodigo(produto.getCodigo());
+            entrada.setProduto(p);
+            entrada.setDate(data);
+            entradaRepository.save(entrada);
+
+            modelAndView.addObject("message", "Entrada realizada com sucesso");
+
+
 
     }
 }

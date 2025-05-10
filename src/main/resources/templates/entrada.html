@@ -184,12 +184,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="entradas : ${entradas}">
-        <Td th:text="${entradas.produto.produtoNome}">nome</Td>
-        <td th:text="${entradas.quantidade}">Quantidade</td>
-        <td th:text="${entradas.getValorCompra()}">Valor Compra</td>
-        <td th:text="${entradas.valorVendaSujerido}">Valor Venda</td>
-        <td th:text="${#temporals.format(entradas.date, 'dd/MM/yyyy')}">Data</td>
+    <tr th:each="entrada : ${entrada}">
+        <Td th:text="${entrada.produto.produtoNome}">nome</Td>
+        <td th:text="${entrada.quantidade}">Quantidade</td>
+        <td th:text="${entrada.valorCompra}">Valor Compra</td>
+        <td th:text="${entrada.valorVendaSujerido}">Valor Venda</td>
+        <td th:text="${#temporals.format(entrada.date, 'dd/MM/yyyy')}">Data</td>
     </tr>
     </tbody>
 </table>

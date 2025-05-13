@@ -60,21 +60,17 @@ public class entradaController {
 
     @GetMapping("/listaprodutos")
     public String listarProdutos(Model model) {
-        List<Entrada> entrada = (List<Entrada>) entradaService.findAll();  // Exemplo de consulta ao repositório
-        model.addAttribute("entrada", entrada);
+        List<Produto> produto = (List<Produto>) entradaService.listarProdutos();  // Exemplo de consulta ao repositório
+        List<Entrada> entradas = (List<Entrada>) entradaService.listarEntradas();  // Exemplo de consulta ao repositório
+        model.addAttribute("entrada", entradas);
+
+        model.addAttribute("produto", produto);
 
         return "entrada"; // Substitua pelo nome da sua página Thymeleaf
     }
 
 
 
-
-    @GetMapping("/listaentradas")
-    public String listarEntradas(Model model) {
-        List<Entrada> entrada = (List<Entrada>) entradaService.findAll();  // Exemplo de consulta ao repositório
-        model.addAttribute("entrada", entrada);
-        return "entrada";
-    }
 
 
 

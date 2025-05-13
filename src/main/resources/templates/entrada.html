@@ -151,7 +151,7 @@
 
 </div>
 
-<table class="table" th:if="${entrada != null and !entrada.isEmpty()}">
+<table class="table" th:if="${produto != null and !produto.isEmpty()}">
     <thead>
     <tr>
         <th>Código</th>
@@ -162,12 +162,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="entrada : ${entrada}">
-        <td th:text="${entrada.produto.codigo}">codigo</td>
-        <td th:text="${entrada.produto.produtoNome}">nome do produto</td>
-        <td th:text="${entrada.produto.descricao}">descrição</td>
-        <td th:text="${entrada.quantidade}">qtd</td>
-        <td th:text="${entrada.valorVendaSujerido}">v Venda</td>
+    <tr th:each="produto : ${produto}">
+        <td th:text="${produto.codigo}">codigo</td>
+        <td th:text="${produto.produtoNome}">nome do produto</td>
+        <td th:text="${produto.descricao}">descrição</td>
+         <td th:text="${entradas.valorVendaSujerido}">v Venda</td>
     </tr>
     </tbody>
 </table>

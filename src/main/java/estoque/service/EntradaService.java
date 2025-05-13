@@ -48,11 +48,11 @@ public class EntradaService {
             }
         }
 
-    public Iterable<Entrada> findAll() {
+    public Iterable<Entrada> listarEntradas() {
         return entradaRepository.findAll(); // Obtendo todas as entradas
     }
 
-    public Iterable<Produto> findAlll() {
+    public Iterable<Produto> listarProdutos() {
         return produtoRepository.findAll(); // Obtendo todas as entradas
     }
 

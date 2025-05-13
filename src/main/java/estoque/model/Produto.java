@@ -24,6 +24,13 @@ public class Produto implements Serializable {
     private List<Entrada> entradas = new ArrayList<>();
 
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public int getCodigo() {
         return codigo;

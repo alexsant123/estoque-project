@@ -1,5 +1,6 @@
 package estoque.service;
 
+import estoque.dto.ProdutoComEntradaDTO;
 import estoque.model.Entrada;
 import estoque.model.Produto;
 import estoque.repository.EntradaRepository;
@@ -10,7 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
-
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -48,13 +52,6 @@ public class EntradaService {
             }
         }
 
-    public Iterable<Entrada> listarEntradas() {
-        return entradaRepository.findAll(); // Obtendo todas as entradas
-    }
-
-    public Iterable<Produto> listarProdutos() {
-        return produtoRepository.findAll(); // Obtendo todas as entradas
-    }
 
 
     public void salvarNovaEntrada(ModelAndView modelAndView, Entrada entrada,Produto produto){
@@ -80,5 +77,35 @@ public class EntradaService {
 
 
 
+    }
+
+    public Iterable<Entrada> listarEntradas() {
+        return entradaRepository.findAll(); // Obtendo todas as entradas
+    }
+
+    public Iterable<Produto> listarProdutos() {
+        return produtoRepository.findAll(); // Obtendo todas as entradas
+    }
+
+    public List<ProdutoComEntradaDTO> getProdutosComEntrada() {
+
+
+        List<Produto> produtos = (List<Produto>)  listarProdutos(); // buscar produtos
+        List<Entrada> entradas = (List<Entrada>)  listarEntradas();  // buscar entradas
+
+        Map<Long, Entrada> entradaPorProdutoId = new HashMap<>();
+        for (Entrada entrada : entradas) {
+            if (entrada.getProduto() != null) {
+                entradaPorProdutoId.put(entrada.getProduto().getId(), entrada);
+            }
+        }
+
+        List<ProdutoComEntradaDTO> resultado = new ArrayList<>();
+        for (Produto produto : produtos) {
+            Entrada entrada = entradaPorProdutoId.get(produto.getId());
+            resultado.add(new ProdutoComEntradaDTO(produto, entrada));
+        }
+
+        return resultado;
     }
 }

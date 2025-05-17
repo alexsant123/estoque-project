@@ -19,6 +19,8 @@ public class Produto implements Serializable {
     private int codigo;
     private String produtoNome;
     private String descricao;
+    private int quantidade;
+
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Entrada> entradas = new ArrayList<>();
@@ -54,6 +56,14 @@ public class Produto implements Serializable {
 
     public void setProdutoNome(String produtoNome) {
         this.produtoNome = produtoNome;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
     @Override

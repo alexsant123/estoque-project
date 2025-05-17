@@ -1,6 +1,7 @@
 package estoque.controller;
 
 
+import estoque.dto.ProdutoComEntradaDTO;
 import estoque.model.Entrada;
 import estoque.model.Produto;
 import estoque.repository.EntradaRepository;
@@ -27,12 +28,13 @@ public class entradaController {
     @Autowired
     private ProdutoRepository produtoRepository;
     @Autowired
-    EntradaRepository entradaRepository;
+    private EntradaRepository entradaRepository;
 
     @Autowired
-    SaidaRepository saidaRepository;
+    private SaidaRepository saidaRepository;
     @Autowired
-    DashboardService dashboardService;
+    private DashboardService dashboardService;
+
 
 
     @PostMapping( value = "/salvar")
@@ -59,24 +61,25 @@ public class entradaController {
 
 
     @GetMapping("/listaprodutos")
-    public String listarProdutos(Model model) {
-        List<Produto> produto = (List<Produto>) entradaService.listarProdutos();  // Exemplo de consulta ao repositório
-        List<Entrada> entradas = (List<Entrada>) entradaService.listarEntradas();  // Exemplo de consulta ao repositório
-        model.addAttribute("entrada", entradas);
+    public String listarProdutoscomEntrada(Model model) {
+        List<ProdutoComEntradaDTO> produtosComEntrad = entradaService.getProdutosComEntrada();
+        System.out.println("Total de produtos: " + produtosComEntrad.size());
 
-        model.addAttribute("produto", produto);
+
+
+        model.addAttribute("produtosComEntrada", produtosComEntrad);
+
 
         return "entrada"; // Substitua pelo nome da sua página Thymeleaf
     }
 
+    @GetMapping("/listaentradas")
+    public String listarentrada (Model model) {
+       Iterable<Entrada> entradas = entradaService.listarEntradas();
+        model.addAttribute("entradas",   entradas);
 
-
-
-
-
-
-
-
+        return "entrada"; // Substitua pelo nome da sua página Thymeleaf
+    }
 
 
 }

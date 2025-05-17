@@ -151,7 +151,7 @@
 
 </div>
 
-<table class="table" th:if="${produto != null and !produto.isEmpty()}">
+<table class="table" th:if="${produtosComEntrada != null and !produtosComEntrada.isEmpty()}">
     <thead>
     <tr>
         <th>Código</th>
@@ -162,15 +162,16 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="produto : ${produto}">
-        <td th:text="${produto.codigo}">codigo</td>
-        <td th:text="${produto.produtoNome}">nome do produto</td>
-        <td th:text="${produto.descricao}">descrição</td>
-         <td th:text="${entradas.valorVendaSujerido}">v Venda</td>
+    <tr th:each="produtosComEntradas : ${produtosComEntrada}">
+        <td th:text="${produtosComEntradas.produto.codigo}">Código</td>
+        <td th:text="${produtosComEntradas.produto.produtoNome}">Nome do Produto</td>
+        <td th:text="${produtosComEntradas.produto.descricao}">Descrição</td>
+        <td th:text="${produtosComEntradas.produto.quantidade}">Quantidade</td>
+        <td th:text="${produtosComEntradas.entrada != null ? produtosComEntradas.entrada.valorVendaSujerido : 'N/A'}">Valor</td>
     </tr>
+
     </tbody>
 </table>
-
 
 <table class="table" th:if="${entradas != null and !entradas.isEmpty()}">
     <thead>
@@ -183,7 +184,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="entrada : ${entrada}">
+    <tr th:each="entrada : ${entradas}">
         <Td th:text="${entrada.produto.produtoNome}">nome</Td>
         <td th:text="${entrada.quantidade}">Quantidade</td>
         <td th:text="${entrada.valorCompra}">Valor Compra</td>
@@ -192,6 +193,8 @@
     </tr>
     </tbody>
 </table>
+
+
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

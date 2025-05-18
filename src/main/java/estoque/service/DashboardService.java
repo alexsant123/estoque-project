@@ -158,6 +158,6 @@ public class DashboardService {
     public List<Produto> gastos_Com_produtos() {
         return (List<Produto>) produtoRepository.findAll();
     }
-    /*
+
  */
 }

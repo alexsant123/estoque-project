@@ -39,8 +39,7 @@ public class entradaController {
 
     @PostMapping( value = "/salvar")
     public ModelAndView salvar(Produto produto, ModelAndView modelAndView ,Entrada entrada) {
-
-
+            modelAndView.setViewName("entrada");
         entradaService.salvarEntrada(modelAndView, produto,entrada);
         System.out.println(produto.getCodigo());
         System.out.println(produto.getProdutoNome());

@@ -25,7 +25,7 @@ public class Entrada implements Serializable {
     private Produto produto;
 
 
-    private int quantidade;
+     private int quantidade;
      private Double valorCompra;
      private Double  valorVendaSujerido;
 

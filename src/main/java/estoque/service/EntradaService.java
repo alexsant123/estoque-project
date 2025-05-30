@@ -60,7 +60,7 @@ public class EntradaService {
             modelAndView.addObject("message", "Erro: Produto ou Entrada inválidos.");
             return;
 
-        } if(produtoRepository.existsByCodigo(produto.getCodigo())==false){
+        } if(!produtoRepository.existsByCodigo(produto.getCodigo())){
 
             modelAndView.addObject("message", " codigo não corresponde a um produto");
               return;

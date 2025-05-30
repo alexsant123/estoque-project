@@ -9,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -30,15 +28,13 @@ public class SaidaController {
     SaidaRepository saidaRepository;
 
     @RequestMapping(method = RequestMethod.POST, value = "/saidaProdutos")
-    public String tirarDoEstoque(Saida saida, Model model, int codigo) {
+    public ModelAndView tirarDoEstoque(Saida saida, ModelAndView modelAndView, @RequestParam int codigo) {
+       modelAndView.setViewName("saida");
 
-        if ( saida.getQuantidade() <= 0) {
 
-            return model.addAttribute("message", "Quantidade inválida.").toString();
-        }else {
-            saidaService.processarSaida(saida, model,codigo);
-        }
-        return  "saida";
+
+            saidaService.processarSaida(saida, modelAndView,codigo);
+        return  modelAndView;
 
     }
     @GetMapping("/saidas")

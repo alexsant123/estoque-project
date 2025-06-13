@@ -43,6 +43,17 @@ public class indexcontroller {
     return "/entradanova"; // Nome do template Thymeleaf
   }
 
+  @GetMapping("/entradas")
+  public String entradas() {
+
+    return "/entradas"; // Nome do template Thymeleaf
+  }
+  @GetMapping("/saidas")
+  public String saidas() {
+
+    return "/saidas"; // Nome do template Thymeleaf
+  }
+
 
 
 }

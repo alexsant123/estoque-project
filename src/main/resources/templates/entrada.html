@@ -160,7 +160,7 @@
     </nav>
 
     <main class="flex-grow-1 p-4" style="background-color: #6A4E42; border: 3px solid #8D6E63;">
-        <body>
+
         <div class="container d-flex flex-column justify-content-center align-items-center" style="min-height: 100vh;">
 
             <h2 class="text-center">Cadastro de Produto</h2>
@@ -205,49 +205,6 @@
             </form>
 
         </div>
-
-        <table class="table" th:if="${produtosComEntrada != null and !produtosComEntrada.isEmpty()}">
-            <thead>
-            <tr>
-                <th>Código</th>
-                <th>Nome do Produto</th>
-                <th>descricao</th>
-                <th>quantidade</th>
-                <th>Valor de Venda</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="produtosComEntradas : ${produtosComEntrada}">
-                <td th:text="${produtosComEntradas.produto.codigo}">Código</td>
-                <td th:text="${produtosComEntradas.produto.produtoNome}">Nome do Produto</td>
-                <td th:text="${produtosComEntradas.produto.descricao}">Descrição</td>
-                <td th:text="${produtosComEntradas.produto.quantidade}">Quantidade</td>
-                <td th:text="${produtosComEntradas.entrada != null ? produtosComEntradas.entrada.valorVendaSujerido : 'N/A'}">Valor</td>
-            </tr>
-
-            </tbody>
-        </table>
-
-        <table class="table" th:if="${entradas != null and !entradas.isEmpty()}">
-            <thead>
-            <tr>
-                <th>nome</th>
-                <th>Quantidade</th>
-                <th>Valor de Compra</th>
-                <th>Valor de Venda Sugerido</th>
-                <th>Data</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="entrada : ${entradas}">
-                <Td th:text="${entrada.produto.produtoNome}">nome</Td>
-                <td th:text="${entrada.quantidade}">Quantidade</td>
-                <td th:text="${entrada.valorCompra}">Valor Compra</td>
-                <td th:text="${entrada.valorVendaSujerido}">Valor Venda</td>
-                <td th:text="${#temporals.format(entrada.date, 'dd/MM/yyyy')}">Data</td>
-            </tr>
-            </tbody>
-        </table>
 
     </main>
 </div>

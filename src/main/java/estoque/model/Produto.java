@@ -73,7 +73,6 @@ public class Produto implements Serializable {
                 ", codigo=" + codigo +
                 ", produtoNome='" + produtoNome + '\'' +
                 ", descricao='" + descricao + '\'' +
-                ", entradas=" + entradas +
                 '}';
     }
 }

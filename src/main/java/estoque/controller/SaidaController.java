@@ -37,7 +37,7 @@ public class SaidaController {
         return  modelAndView;
 
     }
-    @GetMapping("/saidas")
+    @GetMapping("/listasaidas")
     @ResponseBody
     public List<Saida> getSaidas() {
         List<Saida> saidas = (List<Saida>) saidaRepository.findAll();  //

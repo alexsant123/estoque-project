@@ -59,17 +59,16 @@ public class entradaController {
 
 
 
-    @GetMapping("/listaprodutos")
-    public String listarProdutoscomEntrada(Model model) {
-        List<ProdutoComEntradaDTO> produtosComEntrad = entradaService.getProdutosComEntrada();
-        System.out.println("Total de produtos: " + produtosComEntrad.size());
+    @GetMapping("/produtos")
+    public String listarProdutos(Model model) {
+        Iterable<Produto> produtos = entradaService.listarProdutos();
 
 
 
-        model.addAttribute("produtosComEntrada", produtosComEntrad);
+        model.addAttribute("produtos", produtos);
 
 
-        return "entrada"; // Substitua pelo nome da sua página Thymeleaf
+        return "produtos"; // Substitua pelo nome da sua página Thymeleaf
     }
 
     @GetMapping("/listaentradas")

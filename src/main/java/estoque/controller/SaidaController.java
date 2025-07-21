@@ -1,5 +1,6 @@
 package estoque.controller;
 
+import estoque.model.Entrada;
 import estoque.model.Produto;
 import estoque.model.Saida;
 import estoque.repository.SaidaRepository;
@@ -38,13 +39,12 @@ public class SaidaController {
 
     }
     @GetMapping("/listasaidas")
-    @ResponseBody
-    public List<Saida> getSaidas() {
-        List<Saida> saidas = (List<Saida>) saidaRepository.findAll();  //
-        return ResponseEntity.ok(saidas).getBody();  // Retorna a lista como resposta JSON
+    public String listarentrada (Model model) {
+        Iterable<Saida> saidas = saidaService.listarsaidas();
+        model.addAttribute("saidas",   saidas);
 
+        return "saidas"; // Substitua pelo nome da sua página Thymeleaf
     }
-
 
 
 }

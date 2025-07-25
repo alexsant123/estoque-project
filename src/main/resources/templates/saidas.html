@@ -6,28 +6,27 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
+<body th:replace="~{fragments/layout :: layout}">
 
-<header th:replace="~{fragments/layout :: layout}"></header>
 <div th:fragment="content">
-  <main class="main1" style="background-color: #6A4E42; border: 3px solid #8D6E63;">
-    <div> <h3>Lista de Produtos</h3></div>
-    <table class="tab" style="background-color: white;">
-      <thead class="table-dark">
+  <main class="main1" >
+    <h2 style="color: white;">Lista de Saídas</h2>
+    <table class="tab">
+      <thead  >
       <tr>
-        <th>Código</th>
-        <th>Nome do Produto</th>
-        <th>Descrição</th>
+         <th>Nome do Produto</th>
+        <th>data</th>
         <th>Quantidade</th>
+        <th>Valor venda</th>
+
       </tr>
       </thead>
       <tbody>
       <tr th:each="saida : ${saidas}">
-        <td th:text="${saida.id}">id saída</td>
-        <td th:text="${saida.produto.produtoNome}">nome produto</td>
-         <td th:text="${saida.quantidade}">quatidade</td>
-        <td th:text="${saida.date}">data </td>
-        <td th:text="${saida.valorVenda}">valor da venda</td>
+        <td th:text="${saida.produto != null ? saida.produto.produtoNome : 'Produto não definido'}"></td>
+        <td th:text="${saida.date}"></td>
+        <td th:text="${saida.quantidade}"></td>
+        <td th:text="${saida.valorVenda}"></td>
       </tr>
       </tbody>
     </table>

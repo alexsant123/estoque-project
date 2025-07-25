@@ -30,28 +30,13 @@ public class indexcontroller {
 
   @GetMapping({"/", "/index"})
   public String index(Model model) {
-    model.addAttribute("conteudo", "index :: content");
-    model.addAttribute("pageTitle", "Início - Stocki");
-    return "index";
+
+    return "stocki.index";
   }
 
-  @GetMapping("/entradanova")
-  public String entradanova() {
 
-    return "/entradanova"; // Nome do template Thymeleaf
-  }
 
-  @GetMapping("/entradas")
-  public String entradas() {
 
-    return "/entradas"; // Nome do template Thymeleaf
-  }
-
-  @GetMapping("/saidas")
-  public String saidas() {
-
-    return "/saidas"; // Nome do template Thymeleaf
-  }
 
 
 

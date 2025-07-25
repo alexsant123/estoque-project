@@ -41,43 +41,37 @@ public class entradaController {
     public ModelAndView salvar(Produto produto, ModelAndView modelAndView ,Entrada entrada) {
             modelAndView.setViewName("entrada");
         entradaService.salvarEntrada(modelAndView, produto,entrada);
+
+
+        return modelAndView;
+    }
+
+
+    @PostMapping( value = "/SNE")
+    public ModelAndView salvarNovaEntrada(Produto produto, ModelAndView modelAndView ,Entrada entrada) {
+        modelAndView.setViewName("entrada");
+        entradaService.salvarEntrada(modelAndView, produto,entrada);
         System.out.println(produto.getCodigo());
         System.out.println(produto.getProdutoNome());
 
         return modelAndView;
     }
-    @PostMapping( value = "/salvarN")
-    public ModelAndView salvarNE(   Entrada entrada,Produto produto) {
-        ModelAndView modelAndView = new ModelAndView("entradanova"); // nome da sua view
-
-         entradaService.salvarNovaEntrada(modelAndView,entrada,produto);
-
-
-        return modelAndView;
-    }
-
-
-
 
     @GetMapping("/produtos")
     public String listarProdutos(Model model) {
         Iterable<Produto> produtos = entradaService.listarProdutos();
-
-
-
         model.addAttribute("produtos", produtos);
-
-
         return "produtos"; // Substitua pelo nome da sua página Thymeleaf
     }
 
-    @GetMapping("/listaentradas")
-    public String listarentrada (Model model) {
-       Iterable<Entrada> entradas = entradaService.listarEntradas();
-        model.addAttribute("entradas",   entradas);
+    @GetMapping("/entradas")
+    public String listarentradas(Model model) {
+       Iterable<Entrada> listaentradas = entradaService.listarEntradas();
+        model.addAttribute("entradas",listaentradas);
 
-        return "entrada"; // Substitua pelo nome da sua página Thymeleaf
+        return "entradas";
     }
+
 
 
 

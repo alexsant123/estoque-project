@@ -17,17 +17,15 @@ public class Saida implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_saida")
     private Long id;
 
-    @Column(nullable = false)
-    private int quantidade;
+     private int quantidade;
 
-    @Column(nullable = true)
-    private LocalDate date;
+     private LocalDate date;
 
     @ManyToOne
-    @JoinColumn(name = "produto_id", nullable = true, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "produto_fk"))
+    @JoinColumn(name = "produto_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "produto_fk"))
     private Produto produto;
 
-    @Column
+    
     private double valor_venda;
 
     public Long getId() {
@@ -75,6 +73,13 @@ public class Saida implements Serializable {
         this.valor_venda = valorVenda;
     }
 
+    public double getValor_venda() {
+        return valor_venda;
+    }
+
+    public void setValor_venda(double valor_venda) {
+        this.valor_venda = valor_venda;
+    }
 
     @Override
     public boolean equals(Object o) {

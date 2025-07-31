@@ -54,32 +54,31 @@ public class EntradaService {
 
 
 
-    public void salvarNovaEntrada(ModelAndView modelAndView, Entrada entrada,Produto produto){
+    public void salvarNovaEntrada(ModelAndView modelAndView, Entrada entrada, Produto produto) {
 
         if (produto == null || entrada == null) {
             modelAndView.addObject("mg", "Erro: Produto ou Entrada inválidos.");
             return;
-
-        } if(!produtoRepository.existsByCodigo(produto.getCodigo())){
-
-            modelAndView.addObject("mg", " codigo não corresponde a um produto");
-              return;
         }
-        Long produtoId = entrada.getProduto().getId();
-        Produto p = produtoRepository.findById(produtoId).orElse(null);
 
-            LocalDate data = LocalDate.now();
-            Produto p=produtoRepository.findByCodigo(produto.getCodigo());
-            p.setQuantidade(produto.getQuantidade() + entrada.getQuantidade());
+        if (!produtoRepository.existsByCodigo(produto.getCodigo())) {
+            modelAndView.addObject("mg", "Código não corresponde a um produto.");
+            return;
+        }
+
+        LocalDate data = LocalDate.now();
+
+        Produto p = produtoRepository.findByCodigo(produto.getCodigo());
+
+        p.setQuantidade(p.getQuantidade() + entrada.getQuantidade());
+
         entrada.setProduto(p);
-            entrada.setDate(data);
-            entradaRepository.save(entrada);
-            produtoRepository.save(produto);
+        entrada.setDate(data);
 
-            modelAndView.addObject("mg", "Nova Entrada realizada com sucesso");
+        entradaRepository.save(entrada);
+        produtoRepository.save(p); // CORRIGIDO: estava salvando o objeto errado
 
-
-
+        modelAndView.addObject("mg", "Nova entrada realizada com sucesso.");
     }
     
     public Iterable<Produto> listarProdutos() {

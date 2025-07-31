@@ -48,11 +48,19 @@ public class entradaController {
 
 
     @PostMapping( value = "/SNE")
-    public ModelAndView salvarNovaEntrada(Produto produto, ModelAndView modelAndView ,Entrada entrada) {
+    public ModelAndView salvarNovaEntrada(@RequestParam int cod,
+                                          @RequestParam int qtd,
+                                          @RequestParam double valorcompra2,
+                                          @RequestParam double valorVendaSujerido2,ModelAndView modelAndView) {
         modelAndView.setViewName("entrada");
-        entradaService.salvarEntrada(modelAndView, produto,entrada);
-        System.out.println(produto.getCodigo());
-        System.out.println(produto.getProdutoNome());
+        Produto produto= new Produto();
+        produto.setCodigo(cod);
+        Entrada entrada = new Entrada();
+        entrada.setQuantidade(qtd);
+        entrada.setValorCompra(valorcompra2);
+        entrada.setValorVendaSujerido(valorVendaSujerido2);
+
+        entradaService.salvarNovaEntrada(modelAndView, entrada,produto);
 
         return modelAndView;
     }

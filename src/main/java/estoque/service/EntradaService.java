@@ -65,15 +65,18 @@ public class EntradaService {
             modelAndView.addObject("mg", " codigo não corresponde a um produto");
               return;
         }
-
+        Long produtoId = entrada.getProduto().getId();
+        Produto p = produtoRepository.findById(produtoId).orElse(null);
 
             LocalDate data = LocalDate.now();
             Produto p=produtoRepository.findByCodigo(produto.getCodigo());
-            entrada.setProduto(p);
+            p.setQuantidade(produto.getQuantidade() + entrada.getQuantidade());
+        entrada.setProduto(p);
             entrada.setDate(data);
             entradaRepository.save(entrada);
+            produtoRepository.save(produto);
 
-            modelAndView.addObject("mg", "Entrada realizada com sucesso");
+            modelAndView.addObject("mg", "Nova Entrada realizada com sucesso");
 
 
 

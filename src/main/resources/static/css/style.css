@@ -100,3 +100,12 @@ h2{
 .text-center{
     color: #D7CCC8;
 }
+.card-title-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+.bar {
+    height: 20px;
+    background-color: #007bff;
+    margin-bottom: 5px;
+}

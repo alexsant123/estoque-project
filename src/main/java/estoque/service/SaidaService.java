@@ -37,6 +37,8 @@ import java.time.LocalDate;
                saida.setDate(date);
                produtoRepository.save(produto);
                saidaRepository.save(saida);
+               modelAndView.addObject("message"," Saída realizada com sucesso.");
+
            }else {
 
                modelAndView.addObject("message"," inexistente ou quantidade insuficiente.");

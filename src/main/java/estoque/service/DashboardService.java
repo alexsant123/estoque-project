@@ -13,6 +13,7 @@ import org.springframework.web.server.session.InMemoryWebSessionStore;
 import java.time.LocalDate;
 
 import java.time.Month;
+import java.time.format.TextStyle;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -20,7 +21,7 @@ import java.util.stream.Stream;
 
 @Service
 public class DashboardService {
-/*
+
     @Autowired
     private ProdutoRepository produtoRepository;
     @Autowired
@@ -35,12 +36,11 @@ public class DashboardService {
         return produtoRepository.count();
     }
 
-    public void contar_unidades_de_todos_os_produtos() {
-        // Consultando todos os produtos no repositório
+    public Long contar_unidades_de_todos_os_produtos() {
+
         List<Produto> produtos = (List<Produto>) produtoRepository.findAll();
-
-
-
+        Long somaunidades=produtos.stream().mapToLong(Produto::getQuantidade).sum();
+         return somaunidades;
     }
 
     public Long contarProdutosRequistrados() {
@@ -61,8 +61,7 @@ public class DashboardService {
         List<Saida> saidas = (List<Saida>) saidaRepository.findAll();
         Map<Long, Integer> frequencias = new HashMap<>();
 
-// Contando a frequência de cada produto
-        for (Saida saida : saidas) {
+         for (Saida saida : saidas) {
             Long codigoProduto = (long) saida.getProduto().getCodigo();  // Obtém o código do produto
             frequencias.put(codigoProduto, frequencias.getOrDefault(codigoProduto, 0) + 1);
         }
@@ -70,15 +69,14 @@ public class DashboardService {
         Long codigoMaisFrequente = null;
         int maiorFrequencia = 0;
 
-// Encontrando o código do produto mais frequente
-        for (Map.Entry<Long, Integer> entry : frequencias.entrySet()) {
+         for (Map.Entry<Long, Integer> entry : frequencias.entrySet()) {
             if (entry.getValue() > maiorFrequencia) {
                 codigoMaisFrequente = entry.getKey();
                 maiorFrequencia = entry.getValue();
             }
         }
 
-        Produto produtoMaisFrequente = produtoRepository.findByCodigo(codigoMaisFrequente);
+        Produto produtoMaisFrequente = produtoRepository.findByCodigo(Math.toIntExact(codigoMaisFrequente));
 
         String nomeProdutoMaisFrequente = null;
 
@@ -107,21 +105,22 @@ public class DashboardService {
     }
 
 
-    public Map<String, Long> contarSaidasPorMes() {
+
+
+        public Map<String, Long> contarSaidasPorMes() {
         List<Saida> saidas = (List<Saida>) saidaRepository.findAll();
 
-        // Conta as saídas por mês
         Map<Month, Long> contagemPorMes = saidas.stream()
                 .map(Saida::getDate)
                 .collect(Collectors.groupingBy(LocalDate::getMonth, Collectors.counting()));
 
-        // Cria um mapa ordenado de janeiro a dezembro com todos os meses (até os com 0)
         Map<String, Long> resultadoFinal = new LinkedHashMap<>();
         Locale localeBR = new Locale("pt", "BR");
 
         for (Month mes : Month.values()) {
-            String nomeMes = mes.getDisplayName(java.time.format.TextStyle.FULL, localeBR).toUpperCase();
-            resultadoFinal.put(nomeMes, contagemPorMes.getOrDefault(mes, 0L));
+            String nomeMes = mes.getDisplayName(TextStyle.FULL, localeBR).toUpperCase();
+            Long total = contagemPorMes.getOrDefault(mes, 0L);
+            resultadoFinal.put(nomeMes, total);
         }
 
         return resultadoFinal;
@@ -129,35 +128,28 @@ public class DashboardService {
 
 
     public Map<String, Long> contarEntradasPorMes() {
-        List<Entrada> entradas = (List<Entrada>) entradaService.findAll();
+        List<Entrada> entradas = (List<Entrada>) entradaRepository.findAll();
 
+        Map<Month, Long> contagemPorMes = entradas.stream()
+                .map(Entrada::getDate)
+                .collect(Collectors.groupingBy(LocalDate::getMonth, Collectors.counting()));
+
+        Map<String, Long> resultadoFinal = new LinkedHashMap<>();
         Locale localeBR = new Locale("pt", "BR");
 
-        // Cria um mapa ordenado com todos os meses do ano e valor inicial 0
-        Map<String, Long> mesesComContagem = new LinkedHashMap<>();
         for (Month mes : Month.values()) {
-            String nomeMes = mes.getDisplayName(java.time.format.TextStyle.FULL, localeBR).toUpperCase();
-            mesesComContagem.put(nomeMes, 0L);
+            String nomeMes = mes.getDisplayName(TextStyle.FULL, localeBR).toUpperCase();
+            Long total = contagemPorMes.getOrDefault(mes, 0L);
+            resultadoFinal.put(nomeMes, total);
         }
 
-        // Agrupa as entradas por mês e conta a quantidade
-        Map<String, Long> contagemReal = entradas.stream()
-                .map(Entrada::getDate)
-                .collect(Collectors.groupingBy(
-                        data -> data.getMonth()
-                                .getDisplayName(java.time.format.TextStyle.FULL, localeBR).toUpperCase(),
-                        Collectors.counting()
-                ));
-
-        // Atualiza os valores no mapa ordenado
-        contagemReal.forEach(mesesComContagem::put);
-
-        return mesesComContagem;
+        return resultadoFinal;
     }
+
 
     public List<Produto> gastos_Com_produtos() {
         return (List<Produto>) produtoRepository.findAll();
     }
 
- */
+
 }

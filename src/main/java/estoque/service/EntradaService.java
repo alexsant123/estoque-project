@@ -76,7 +76,7 @@ public class EntradaService {
         entrada.setDate(data);
 
         entradaRepository.save(entrada);
-        produtoRepository.save(p); // CORRIGIDO: estava salvando o objeto errado
+        produtoRepository.save(p);
 
         modelAndView.addObject("mg", "Nova entrada realizada com sucesso.");
     }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @Controller
-public class indexcontroller {
+public class pagescontroller {
 
   @Autowired
   static DashboardService dashboardService;
@@ -28,11 +28,6 @@ public class indexcontroller {
     return "/saida";
   }
 
-  @GetMapping({"/", "/index"})
-  public String index(Model model) {
-
-    return "stocki.index";
-  }
 
 
 
